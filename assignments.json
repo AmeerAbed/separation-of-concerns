@@ -17,6 +17,26 @@
   ],
   "exercises": [
     {
+      "name": "listeners-and-handlers",
+      "live": true,
+      "endpoints": [
+        "exercise-1",
+        "exercise-2",
+        "exercise-3"
+      ]
+    },
+    {
+      "name": "handler-refactors",
+      "live": true,
+      "endpoints": [
+        "duck-duck-search",
+        "hex-setter",
+        "sub-string",
+        "hovercraft",
+        "type-caster"
+      ]
+    },
+    {
       "name": "using-user-input",
       "live": true,
       "endpoints": [
@@ -27,7 +47,7 @@
       ]
     },
     {
-      "name": "Review the Sunday lesson plans",
+      "name": "Practice Sunday lesson plan exercises",
       "live": "https://hackyourfuture.be/separation-of-concerns",
       "source": false,
       "endpoints": [

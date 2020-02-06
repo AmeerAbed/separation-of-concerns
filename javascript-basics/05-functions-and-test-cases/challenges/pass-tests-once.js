@@ -11,7 +11,7 @@ function scramble(a, b, c) {
 
 }
 
-testCases.forEach(function (test) {
+testCases.forEach(function evaluateTestCase(test) {
   const actual = scramble(...test.args);
   console.assert(
     actual === test.expected,

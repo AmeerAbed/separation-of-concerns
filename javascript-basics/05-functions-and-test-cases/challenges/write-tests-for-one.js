@@ -21,6 +21,6 @@ function typo(x, y) {
   return `(${typeofX === typeofY}) ${x}, ${y} (${areEqual})`;
 }
 
-testCases.forEach(function (test) {
+testCases.forEach(function evaluateTestCase(test) {
   console.assert(typo(...test.args) === test.expected, test.name);
 });

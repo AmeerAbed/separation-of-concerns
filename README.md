@@ -19,7 +19,7 @@ The idea that a software system must be decomposed into parts that overlap in fu
   * [Prep Work](./week-1)
   * [Lesson Plan](https://hackyourfuture.be/separation-of-concerns/week-1)
   * [Assignments](./week-1#assignments)
-* Week 2: `debugger`
+* Week 2: Step Through
   * [Prep Work](./week-2)
   * [Lesson Plan](https://hackyourfuture.be/separation-of-concerns/week-2)
   * [Assignments](./week-2#assignments)

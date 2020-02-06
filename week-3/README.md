@@ -17,7 +17,6 @@ Study the [Sunday lesson plan](https://hackyourfuture.be/separation-of-concerns/
 
 ### Isolating JavaScript
 
-* Implicit Coercion: [fcc/news/js-type-coercion](https://www.freecodecamp.org/news/js-type-coercion-explained-27ba3d9a2839/)
 * Objects: [javascript.info/type-conversions](https://javascript.info/type-conversions)
 * Arrays: [javascript.info/operators](https://javascript.info/operators)
 * Iterating Objects & Arrays: [javascript.info/while-for](https://javascript.info/while-for) and complete the tasks
@@ -33,11 +32,14 @@ Study the [Sunday lesson plan](https://hackyourfuture.be/separation-of-concerns/
 
 ## Assignments
 
-This week there is 1 project, and 4 exercise sets.
+This week there is 1 project, and  exercise sets.
 
 ### Project: ``
 
 ### Exercises
+
+* Study the [_Debugging_ challenges](https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/debugging/) from FreeCodeCamp
+  * Copy-paste each and every exercise into [JS Tutor](http://pythontutor.com/javascript.html#mode=edit) to get the most out of your studying!
 
 ---
 ---

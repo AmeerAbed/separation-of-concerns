@@ -45,7 +45,7 @@ Learning how apps are structured and of the different roles code can play, you w
 
 ## Assignments
 
-This week there is 1 project, and 3 exercise sets.
+This week there is 1 project, and 4 exercise sets.
 
 ### Project: `calculator-refactor`
 
@@ -78,11 +78,15 @@ What are you waiting for, get coding!
 
 ### Exercises
 
-There are 3 sets of exercises to start this week:
+There are 4 sets of exercises to start this week:
 
 * Fork [using-user-input](https://github.com/hackyourfuturebelgium/using-user-input)
   * Turn on GitHub Pages
   * Complete `1-fill-in-the-blanks`
+  * Push your work regularly, so you can ask questions with issues!
+* Fork [handler-refactors](https://github.com/HackYourFutureBelgium/handler-refactors)
+  * Turn on GitHub Pages
+  * Finish them all!
   * Push your work regularly, so you can ask questions with issues!
 * Begin the FreeCodeCamp JavaScript exercises
   * Sign into FreeCodeCamp using your GitHub Account

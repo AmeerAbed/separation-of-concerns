@@ -1,5 +1,5 @@
 // BEHAVIOR: the test cases a function passes (inputs & outputs)
-// IMPLEMENTATION: the code inside the function (how it is written)
+// IMPLEMENTATION: the code inside the function evaluateTestCase (how it is written)
 
 const behaviorTests = [
   { name: 'first', args: [true], expected: 'boolean, true' },
@@ -13,7 +13,7 @@ const behaviorTests = [
 function implementation_1(param) {
   return typeof param + ', ' + param;
 }
-behaviorTests.forEach(function (test) {
+behaviorTests.forEach(function evaluateTestCase(test) {
   console.assert(
     implementation_1(...test.args) === test.expected,
     `${test.name} (implementation 1)`
@@ -25,7 +25,7 @@ function implementation_2(value) {
   const type = typeof value;
   return `${type}, ${value}`;
 }
-behaviorTests.forEach(function (test) {
+behaviorTests.forEach(function evaluateTestCase(test) {
   console.assert(
     implementation_2(...test.args) === test.expected,
     `${test.name} (implementation 2)`

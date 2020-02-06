@@ -1,0 +1,941 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <title>wk 2: Step Through</title>
+
+  <script src='../embed-scripts/code-along.js'></script>
+
+  <link rel="stylesheet" href="../reveal.js/css/reset.css">
+  <link rel="stylesheet" href="../reveal.js/css/reveal.css">
+  <link rel="stylesheet" href="../reveal.js/css/theme/night.css">
+
+  <script src="../embed-scripts/beautify.js"></script>
+
+  <!-- Theme used for syntax highlighting of code -->
+  <!-- <link rel="stylesheet" href="./reveal.js/lib/css/monokai.css"> -->
+
+  <!-- Printing and PDF exports -->
+  <!-- <script>
+    var link = document.createElement('link');
+    link.rel = '../reveal.js/stylesheet';
+    link.type = '../reveal.js/text/css';
+    link.href = window.location.search.match(/print-pdf/gi) ? '../reveal.js/css/print/pdf.css' : './reveal.js/css/print/paper.css';
+    document.getElementsByTagName('head')[0].appendChild(link);
+  </script> -->
+
+  <style>
+    /* https://stackoverflow.com/questions/25479420/how-to-add-a-fixed-footer-on-all-slides */
+    .reveal .footer {
+      position: absolute;
+      bottom: 1em;
+      left: 1em;
+      font-size: 0.5em;
+    }
+  </style>
+</head>
+
+<body>
+
+
+  <div class="reveal">
+    <div class='footer'>
+      <code id="footer-text">ESC to overview</code>
+      <br>
+      <a id='to-repo' style='visibility:hidden' href="https://github.com/hackyourfuturebelgium/separation-of-concerns"
+        target="_blank">
+        <code>module repository</code>
+      </a>
+    </div>
+
+
+    <div class="slides">
+
+      <section id='cover-slide'>
+        <h3>Separation of Concerns</h3>
+        <br>
+        <h2>Week 2: Step Through</h2>
+        <br>
+        <p>
+          hit "s" for speaker notes
+        </p>
+        <a href="https://github.com/hackyourfuturebelgium/separation-of-concerns/tree/master/week-1" target='_blank'>
+          -- back to repo --
+        </a>
+      </section>
+
+      <section id='about-today'>
+        <h1>About Today</h1>
+        <br>
+        <br>
+        <p>Learning Objectives, Announcements, Installations</p>
+        <br>
+        <code>(~10 min)</code>
+      </section>
+      <section id="learning-objectives">
+        <section>
+          <h2>Learning Objectives</h2><br>
+          <br>
+          <br>
+          <p>
+            What can you expect to cover in class today?
+          </p>
+        </section>
+        <section>
+          <h3>The Big Picture</h3>
+          <br>
+          <ul>
+            <li>What is programming?</li>
+            <li>What are programming languages?</li>
+            <li>What is the role of source code?</li>
+            <li>Who are the audiences for you code?</li>
+            <li>What is the code authoring process?</li>
+            <li>How do you write meaningful code?</li>
+          </ul>
+        </section>
+        <section>
+          <h3>Isolating JavaScript</h3>
+          <br>
+          <ul>
+            <li>Program Life-Cycle & Errors</li>
+            <li>Types, Values & Comparisons</li>
+            <li>Variables</li>
+            <li>Block Scope</li>
+            <li>Conditionals</li>
+            <li>Functions & Test Cases</li>
+          </ul>
+        </section>
+        <section>
+          <h3>Integrating JavaScript</h3>
+          <br>
+          <ul>
+            <li>Using JS from HTML files</li>
+            <li>Adding Event Listeners</li>
+            <li>Writing Event Handlers</li>
+            <li>Reading Input From Form Events</li>
+            <li>String Manipulation</li>
+            <li>Writing results to the DOM</li>
+            <li>Using the debugger statement</li>
+          </ul>
+        </section>
+      </section>
+
+      <section id="installations">
+        <section>
+          <h2>Installations</h2>
+          <br>
+          <p>Extensions to write readable code.</p>
+        </section>
+        <section>
+          <h2>VSC Extensions</h2>
+          <br>
+          <ul>
+            <li>
+              <a href="https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint" target='_blank'>
+                ESLint</a>
+            </li>
+            <li>
+              <a href="https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode" target='_blank'>
+                Prettier</a>
+            </li>
+            <li>
+              <a href="https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker"
+                target='_blank'>
+                Code Spell-Checker
+              </a>
+            </li>
+            <li>
+              <a href="https://marketplace.visualstudio.com/items?itemName=CoenraadS.bracket-pair-colorizer"
+                target='_blank'>
+                Bracket Pair Colorizer</a> (optional)
+            </li>
+            <li><a href=" https://code.visualstudio.com/docs/editor/emmet" tar get='_blank'>
+                Emmet</a> (optional)
+            </li>
+          </ul>
+        </section>
+      </section>
+
+      <section id='review'>
+        <h1>Review</h1>
+        <br>
+        <br>
+        <p>Any <code>ask-on-sunday</code> issues?</p>
+        <p>Any other Questions?</p>
+        <br>
+        <code>(~20 min)</code>
+      </section>
+
+      <section id='review'>
+        <h1>New Material</h1>
+        <br>
+        <br>
+        <p>An quick introduction to new concepts this week.</p>
+        <br>
+        <br>
+        <code>(~80 min)</code>
+      </section>
+
+
+      <section id='review'>
+        <h1>Isolating JavaScript</h1>
+        <br>
+        <p>A deep look inside program execution</p>
+      </section>
+
+      <section id='step-through'>
+        <section>
+          <h2>Stepping Through</h2>
+          <br>
+          <h3>also "tracing"</h3>
+          <br>
+          <code>(in class)</code>
+        </section>
+        <section>
+          <h3>What is this?</h3>
+          <br>
+          <p>To master JS you must learn how your code is executed.</p>
+          <p>To learn this, you must trace programs one step at a time.</p>
+          <p>There are two outstanding tools to help guide you ...</p>
+        </section>
+        <section>
+          <h2>JS Tutor</h2>
+          <br>
+          <ul>
+            <li>+ Presents just what's needed to for understanding</li>
+            <li>+ Not just for beginners! it's helpful forever</li>
+            <li>- It is limited. No DOM, events, handlers, ...</li>
+            <li><a href='https://www.youtube.com/watch?v=y3sVN7uaxDM' target='_blank'>intro to JS Tutor</a>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h2>DevTools Debugger</h2>
+          <br>
+          <ul>
+            <li>+ Covers everything: JS, DOM, events, network, ...</li>
+            <li>+ Highly detailed information about your program</li>
+            <li>- Overwhelming until you have some experience</li>
+            <li><a href='https://javascript.info/debugging-chrome' target='_blank'>intro to Chrome Debugger</a>
+            </li>
+          </ul>
+        </section>
+        <section id='tricky-tracer'>
+          <script>
+            codeAlong({
+              title: 'Tricky Tracer',
+              container: 'tricky-tracer',
+              type: 'js',
+              source: './tricky-tracer.js'
+            })
+          </script>
+        </section>
+      </section>
+
+      <section id='type-coercion'>
+        <section>
+          <h2>Type Coercion</h2>
+          <br>
+          <p>changing a value's type</p>
+          <br>
+          <code>(in class)</code>
+        </section>
+        <section>
+          <h3>Code-Alongs</h3>
+          <p>Type Coercion</p>
+          <br>
+          <ul>
+            <li><a href='#string-coercion'>
+                String
+              </a></li>
+            <li><a href='#boolean-coercion'>
+                Boolean
+              </a></li>
+            <li><a href='#number-coercion'>
+                Number
+              </a></li>
+            <li><a href='#coercion-challenges'>
+                Challenges
+              </a></li>
+          </ul>
+        </section>
+        <section>
+          <h3>Helpful Links</h3>
+          <p>Type Coercion</p>
+          <br>
+          <ul>
+            <li><a href='https://javascript.info/type-conversions' target='_blank'>
+                javascript.info/type-conversions
+              </a></li>
+            <li><a href='https://www.freecodecamp.org/news/js-type-coercion-explained-27ba3d9a2839/' target='_blank'>
+                FCC: type coercion explained
+              </a></li>
+            <li><a href='https://programmingsoup.com/article/javascript-coercion' target='_blank'>
+                programmingsoup: javascript coercion
+              </a></li>
+          </ul>
+        </section>
+        <section id='string-coercion'>
+          <script>
+            codeAlong({
+              title: 'Coercion to String',
+              container: 'string-coercion',
+              type: 'js',
+              source: [
+                {
+                  name: '',
+                  path: '../javascript-basics/06-type-coercion/String.js'
+                },
+              ]
+            })
+          </script>
+        </section>
+        <section id='boolean-coercion'>
+          <script>
+            codeAlong({
+              title: 'Coercing to Boolean',
+              container: 'boolean-coercion',
+              type: 'js',
+              source: [
+                {
+                  name: '',
+                  path: '../javascript-basics/06-type-coercion/Boolean.js'
+                },
+              ]
+            })
+          </script>
+        </section>
+        <section id='number-coercion'>
+          <script>
+            codeAlong({
+              title: 'Coercing to Number',
+              container: 'number-coercion',
+              type: 'js',
+              source: [
+                {
+                  name: 'Number()',
+                  path: '../javascript-basics/06-type-coercion/Number.js'
+                },
+                {
+                  name: 'isNaN()',
+                  path: '../javascript-basics/06-type-coercion/NaN/isNaN.js'
+                },
+                {
+                  name: 'Number.isNaN()',
+                  path: '../javascript-basics/06-type-coercion/NaN/Number-dot-isNaN.js'
+                },
+                {
+                  name: 'NaN-y Strings',
+                  path: '../javascript-basics/06-type-coercion/NaN/NaNy-strings.js'
+                },
+              ]
+            })
+          </script>
+        </section>
+        <section id='coercion-challenges'>
+          <script>
+            codeAlong({
+              title: 'Coercion Challenges',
+              container: 'coercion-challenges',
+              type: 'js',
+              source: [
+                {
+                  name: 'String -> Number -> String',
+                  path: '../javascript-basics/03-primitive-types-and-values/challenges/string-number-string.js'
+                }
+              ]
+            })
+          </script>
+        </section>
+      </section>
+
+      <section id='truthiness-and-boolean-operators'>
+        <section>
+          <h2>Truthiness</h2>
+          <br>
+          <!-- <p>Does it cast to <code>true</code> or <code>false</code>?</p> -->
+          <p>It's how Boolean Operators work.</p>
+          <br>
+          <code>(in class)</code>
+        </section>
+        <section>
+          <h3>Code-Alongs</h3>
+          <p>Truthiness</p>
+          <br>
+          <ul>
+            <li><a href='#truthiness'>
+                Truthiness
+              </a></li>
+            <li><a href='#boolean-operators'>
+                Boolean Operators
+              </a></li>
+            <li><a href='#boolean-challenges'>
+                Challenges
+              </a></li>
+          </ul>
+        </section>
+        <section>
+          <h3>Helpful Links</h3>
+          <p>Truthiness</p>
+          <br>
+          <ul>
+            <li><a href='https://javascript.info/logical-operators' target='_blank'>
+                javascript.info/logical-operators
+              </a></li>
+            <!-- <li><a href='https://www.freecodecamp.org/news/js-type-coercion-explained-27ba3d9a2839/' target='_blank'>
+                FCC: type coercion explained
+              </a></li> -->
+            <li><a href='https://github.com/janke-learning/truthiness' target='_blank'>
+                janke-learning/truthiness
+              </a></li>
+          </ul>
+        </section>
+        <section id='truthiness'>
+          <script>
+            codeAlong({
+              title: 'Truthiness',
+              container: 'truthiness',
+              type: 'js',
+              source: [
+                {
+                  name: 'Does it cast to true?',
+                  path: '../javascript-basics/07-truthiness/does-it-cast-to-true.js'
+                },
+                {
+                  name: 'Does it cast to true?',
+                  path: '../javascript-basics/07-truthiness/truthiness-practice.js'
+                },
+              ]
+            })
+          </script>
+        </section>
+        <section id='boolean-operators'>
+          <script>
+            codeAlong({
+              title: 'Boolean Operators',
+              container: 'boolean-operators',
+              type: 'js',
+              source: [
+                {
+                  name: 'and. &&',
+                  path: '../javascript-basics/07-truthiness/boolean-operators/and.js'
+                },
+                {
+                  name: 'or. ||',
+                  path: '../javascript-basics/07-truthiness/boolean-operators/or.js'
+                },
+                {
+                  name: 'not. !',
+                  path: '../javascript-basics/07-truthiness/boolean-operators/not.js'
+                },
+                {
+                  name: 'ternary.  ? :',
+                  path: '../javascript-basics/07-truthiness/boolean-operators/ternary.js'
+                },
+              ]
+            })
+          </script>
+        </section>
+        <section id='truthiness-challenges'>
+          <script>
+            codeAlong({
+              title: 'Truthiness Challenges',
+              container: 'truthiness-challenges',
+              type: 'js',
+              source: [
+                {
+                  name: 'Type or Value',
+                  path: '../javascript-basics/07-truthiness/boolean-operators/challenges/type-or-value.js'
+                },
+                {
+                  name: 'Demorgan\'s Law',
+                  path: '../javascript-basics/07-truthiness/boolean-operators/challenges/demorgans-law.js'
+                },
+                {
+                  name: 'Pass Some Tests!',
+                  path: '../javascript-basics/07-truthiness/boolean-operators/challenges/pass-some-tests.js'
+                },
+              ]
+            })
+          </script>
+        </section>
+      </section>
+
+      <section id='implicit-coercion'>
+        <section>
+          <h2>Implicit Coercions</h2>
+          <br>
+          <p>The invisible step behind JS operators</p>
+          <br>
+          <code>(at home)</code>
+        </section>
+        <section>
+          <h3>Code-Alongs</h3>
+          <p>Operators</p>
+          <br>
+          <ul>
+            <li><a href='#string-coercion'>
+                Values have the same type
+              </a></li>
+            <li><a href='#boolean-coercion'>
+                Boolean
+              </a></li>
+            <li><a href='#number-coercion'>
+                Number
+              </a></li>
+            <li><a href='#coercion-challenges'>
+                Challenges
+              </a></li>
+          </ul>
+        </section>
+        <section>
+          <h3>Helpful Links</h3>
+          <p>Operators</p>
+          <br>
+          <ul>
+            <li><a href='https://javascript.info/type-conversions' target='_blank'>
+                javascript.info/type-conversions
+              </a></li>
+            <li><a href='https://www.freecodecamp.org/news/js-type-coercion-explained-27ba3d9a2839/' target='_blank'>
+                FCC: type coercion explained
+              </a></li>
+            <li><a href='https://programmingsoup.com/article/javascript-coercion' target='_blank'>
+                programmingsoup: javascript coercion
+              </a></li>
+          </ul>
+        </section>
+        <section id='string-coercion'>
+          <script>
+            codeAlong({
+              title: 'Coercion to String',
+              container: 'string-coercion',
+              type: 'js',
+              source: [
+              ]
+            })
+          </script>
+        </section>
+        <section id='boolean-coercion'>
+          <script>
+            codeAlong({
+              title: 'Coercing to Boolean',
+              container: 'boolean-coercion',
+              type: 'js',
+              source: [
+              ]
+            })
+          </script>
+        </section>
+        <section id='number-coercion'>
+          <script>
+            codeAlong({
+              title: 'Coercing to Number',
+              container: 'number-coercion',
+              type: 'js',
+              source: [
+              ]
+            })
+          </script>
+        </section>
+        <section id='coercion-challenges'>
+          <script>
+            codeAlong({
+              title: 'Coercion Challenges',
+              container: 'coercion-challenges',
+              type: 'js',
+              source: [
+              ]
+            })
+          </script>
+        </section>
+      </section>
+
+      <section id='operator-precedence'>
+        <section>
+          <h2>Operator Precedence</h2>
+          <br>
+          <p>Simplifying long lines of code</p>
+          <br>
+          <code>(at home)</code>
+        </section>
+      </section>
+
+      <section id='conditional-statements'>
+        <section>
+          <h2>Conditional Statements</h2>
+          <br>
+          <p>Simplifying long lines of code</p>
+          <br>
+          <code>(at home)</code>
+        </section>
+      </section>
+
+
+      <section id='loops'>
+        <section>
+          <h2>Loops</h2>
+          <br>
+          <p>Repeating commands</p>
+          <br>
+          <code>(in class)</code>
+        </section>
+      </section>
+
+
+
+      <section id='review'>
+        <h1>Break!</h1>
+        <br>
+        <code>(~20 min)</code>
+      </section>
+
+
+      <section id='integrating-javascript'>
+        <h1>Integrating JavaScript</h1>
+        <br>
+        <p>A high-level view of interactive web pages.</p>
+        <br>
+        <code>(~90 min)</code>
+      </section>
+
+
+      <section id='project-schematic'>
+        <section>
+          <h2>Project Schematic</h2>
+          <br>
+          <p>Visualizing your project architecture</p>
+          <br>
+          <code>(at home)</code>
+        </section>
+        <section>
+          <img src='../assets/architecture-schematic.png' style='height:90vh' alt='architecture schematic' />
+        </section>
+      </section>
+
+      <section id='stepped-projects'>
+        <section>
+          <h2>Stepped Projects</h2>
+          <br>
+          <p>Two projects, built in steps</p>
+          <br>
+          <code>(at home)</code>
+        </section>
+        <section>
+          <h3>0. Setup</h3>
+          <br>
+          <p>Make sure all the boilerplate is in place.</p>
+        </section>
+        <section>
+          <h3>1. DOM</h3>
+          <br>
+          <p>Define the structure of your user interface.</p>
+        </section>
+        <section>
+          <h3>2. Styles</h3>
+          <br>
+          <p>Define the appearance of your user interface.</p>
+        </section>
+        <section>
+          <h3>3. Listeners</h3>
+          <br>
+          <p>Respond to user interactions.</p>
+        </section>
+        <section>
+          <h3>4. Handlers</h3>
+          <br>
+          <p>Do something meaningful with the user's input.</p>
+        </section>
+        <section>
+          <h3>5. Logic</h3>
+          <br>
+          <p>Refactor & test the core logic of your web site.</p>
+        </section>
+        <section id='stepped-mouse-coordinates'>
+          <script>
+            codeAlong({
+              title: 'Mouse Coordinates',
+              container: 'stepped-mouse-coordinates',
+              type: 'document',
+              source: [
+                {
+                  name: '0: Setup',
+                  path: '../example-projects/mouse-coordinates-stepped/0-setup.html'
+                },
+                {
+                  name: '1: DOM',
+                  path: '../example-projects/mouse-coordinates-stepped/1-dom.html'
+                },
+                {
+                  name: '2: Style',
+                  path: '../example-projects/mouse-coordinates-stepped/2-style.html'
+                },
+                {
+                  name: '3: Listener',
+                  path: '../example-projects/mouse-coordinates-stepped/3-listeners.html'
+                },
+                {
+                  name: '4: Handler',
+                  path: '../example-projects/mouse-coordinates-stepped/4-handlers.html'
+                },
+                {
+                  name: '5: Logic',
+                  path: '../example-projects/mouse-coordinates-stepped/5-logic.html'
+                },
+              ]
+            })
+          </script>
+        </section>
+        <section id='stepped-flip-book'>
+          <script>
+            codeAlong({
+              title: 'Flip-Book',
+              container: 'stepped-flip-book',
+              type: 'document',
+              source: [
+                {
+                  name: '0: Setup',
+                  path: '../example-projects/flip-book-stepped/0-setup.html'
+                },
+                {
+                  name: '1: DOM',
+                  path: '../example-projects/flip-book-stepped/1-dom.html'
+                },
+                {
+                  name: '2: Style',
+                  path: '../example-projects/flip-book-stepped/2-style.html'
+                },
+                {
+                  name: '3: Listener',
+                  path: '../example-projects/flip-book-stepped/3-listener.html'
+                },
+                {
+                  name: '4: Handler',
+                  path: '../example-projects/flip-book-stepped/4-handler.html'
+                },
+                {
+                  name: '5: Logic',
+                  path: '../example-projects/flip-book-stepped/5-logic.html'
+                },
+              ]
+            })
+          </script>
+        </section>
+      </section>
+
+      <section id='separated-projects'>
+        <section>
+          <h2>Separated Concerns</h2>
+          <br>
+          <p>The same projects, separated by concern</p>
+          <br>
+          <code>(at home)</code>
+        </section>
+        <section>
+          <h3>Inspecting Sources</h3>
+          <br>
+          <ul>
+            <li><a href='https://developers.google.com/web/tools/chrome-devtools/sources' target='_blank'>
+                Chrome/ium: sources tab in the DevTools</a>
+            </li>
+            <li><a href='https://extensionworkshop.com/documentation/develop/debugging/#debugging-content-scripts'
+                target='_blank'>
+                Firefox: debugger tab in the DevTools</a>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h3>Group Study</h3>
+          <br>
+          <ul>
+            <li><a href='../example-projects/flip-book-separated' target='_blank'>
+                Flip Book</a></li>
+            <li><a href='../example-projects/mouse-coordinates-separated' target='_blank'>
+                Mouse Coordinates</a></li>
+          </ul>
+        </section>
+        <section>
+          <h3>Further Study</h3>
+          <br>
+          <ul>
+            <li><a href='https://kode-blog.io/javascript-separation-of-concerns' target='_blank'>
+                Hello World Example</a></li>
+            <li><a href='https://jonbellah.com/articles/separation-of-concerns/' target='_blank'>
+                Some helpful Suggestions</a></li>
+            <li><a
+                href='https://softwareengineering.stackexchange.com/questions/32581/how-do-you-explain-separation-of-concerns-to-others'
+                target='_blank'>
+                How would you explain it?</a></li>
+
+          </ul>
+          <p>How well are these separated?</p>
+          <ul>
+            <li><a href='https://janke-learning.org/arithmetic-coercion' target='_blank'>
+                Arithmetic Coercion</a></li>
+            <li><a href='https://janke-learning.org/equalities-coercion' target='_blank'>
+                Equalities Coercion</a></li>
+          </ul>
+        </section>
+      </section>
+
+      <section>
+        <section>
+          <h2>JavaScript Debugger</h2>
+          <br>
+          <p>Like JS Tutor for whole websites</p>
+          <br>
+          <code>(in class)</code>
+        </section>
+        <section>
+          <h3>References</h3>
+          <br>
+          <ul>
+            <li>
+              <a href='https://javascript.info/debugging-chrome' target='_blank'>
+                Step-by-Step intro
+              </a>
+            </li>
+            <li>
+              <a href='https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/debugger'
+                target='_blank'>
+                the <code>debugger</code> statement
+              </a>
+            </li>
+            <li>
+              <a href='https://www.youtube.com/watch?v=sK8KU8oiF8s' target='_blank'>
+                In FireFox
+              </a>
+            </li>
+            <li>
+              <a href='https://developers.google.com/web/tools/chrome-devtools/javascript/' target='_blank'>
+                In Chrome/ium
+              </a>
+            </li>
+          </ul>
+        </section>
+        <section id='debugger-statement'>
+          <h3>
+            <a href='./debugger/index.html' target='_blank'>
+              Example to Study
+            </a>
+          </h3>
+          <br>
+          <p>
+            What happens when you refresh this example
+            <br> with your devtools open?
+          </p>
+        </section>
+      </section>
+
+
+      <section id='code-along'>
+        <section>
+          <h1>Code-Along</h1>
+          <br>
+          <p>Build a project together</p>
+          <br>
+          <code>(in class)</code>
+        </section>
+        <section>
+          <h3>
+            <a href='https://github.com/HackYourFutureBelgium/user-input-code-along' target='_blank'>
+              Starter Repo
+            </a>
+          </h3>
+        </section>
+      </section>
+
+      <section id='homework-launch'>
+        <section>
+          <h2>Homework Launch</h2>
+          <br>
+          <p>It's only just beginning :)</p>
+        </section>
+        <section>
+          <h2><a href='https://github.com/hackyourfuturebelgium/separation-of-concerns/tree/master/week-1'
+              target='_blank'>
+              The Assignments</a></h2>
+        </section>
+        <section>
+          <h2><a href='https://github.com/HackYourFutureBelgium/homework-submission#weekly-issues' target='_blank'>
+              Weekly Issues</a></h2>
+          <p>if you haven't already, please create an issue and:</p>
+          <br>
+          <ol>
+            <li>Name it something helpful</li>
+            <li><a
+                href='https://help.github.com/en/github/managing-your-work-on-github/assigning-issues-and-pull-requests-to-other-github-users'
+                target='_blank'>
+                Assign</a>, it to yourself</li>
+            <li><a
+                href='https://help.github.com/en/github/managing-your-work-on-github/applying-labels-to-issues-and-pull-requests'
+                target='_blank'>
+                Label</a>, it <code>week-2</code></li>
+            <li><a href='https://help.github.com/en/github/managing-your-work-on-github/about-milestones'
+                target='_blank'>
+                Milestone</a> it <code>incremental-development</code></li>
+            <li>Fill in the assignments</li>
+            <li>Move it to the project board</li>
+          </ol>
+        </section>
+      </section>
+
+      <section id='cover-slide'>
+        <h3>Separation of Concerns</h3>
+        <br>
+        <h2>Week 1: Isolate & Integrate</h2>
+        <br>
+        <p>
+          hit "s" for speaker notes
+        </p>
+        <a href="https://github.com/hackyourfuturebelgium/separation-of-concerns/tree/master/week-1" target='_blank'>
+          -- back to repo --
+        </a>
+      </section>
+
+    </div>
+  </div>
+
+  <script src="../reveal.js/js/reveal.js"></script>
+
+  <script>
+    // More info about config & dependencies:
+    // - https://github.com/hakimel/reveal.js#configuration
+    // - https://github.com/hakimel/reveal.js#dependencies
+    Reveal.initialize({
+      slideNumber: 'h/t',
+      width: "100%",
+      height: "100%",
+      keyboard: {
+        67: function () { RevealChalkboard.toggleNotesCanvas() },	// toggle notes canvas when 'c' is pressed
+        66: function () { RevealChalkboard.toggleChalkboard() },	// toggle chalkboard when 'b' is pressed
+        46: function () { RevealChalkboard.clear() },	// clear chalkboard when 'DEL' is pressed
+        8: function () { RevealChalkboard.reset() },	// reset chalkboard data on current slide when 'BACKSPACE' is pressed
+        68: function () { RevealChalkboard.download() },	// downlad recorded chalkboard drawing when 'd' is pressed
+      },
+      dependencies: [
+        // { src: 'plugin/markdown/marked.js' },
+        // { src: 'plugin/markdown/markdown.js' },
+        { src: '../reveal.js/plugin/notes/notes.js', async: true },
+        // { src: './reveal.js/plugin/chalkboard/chalkboard.js' },
+        // { src: 'plugin/highlight/highlight.js', async: true }
+      ]
+    });
+
+    Reveal.addEventListener('overviewshown', function (event) {
+      document.getElementById('footer-text').innerHTML = "ESC into slide";
+      document.getElementById('to-repo').style.visibility = 'visible';
+    });
+    Reveal.addEventListener('overviewhidden', function (event) {
+      document.getElementById('footer-text').innerHTML = "ESC to overview";
+      document.getElementById('to-repo').style.visibility = 'hidden';
+    });
+
+
+
+  </script>
+</body>
+
+</html>

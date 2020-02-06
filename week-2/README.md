@@ -1,4 +1,4 @@
-# Week 2: `debugger`
+# Week 2: Step Through
 
 This week you should focus on using different techniques to pause and step through your code.  JS Tutor is an outstanding tool to study and learn JavaScript in isolation. You should be using it every hour of every day! Even after graduating HYF and beginning your professional experience, JS Tutor will still be a useful tool for learning and debugging. But it is limited to studying JavaScript in isolated snippets.
 
@@ -27,11 +27,13 @@ Study the [Sunday lesson plan](https://hackyourfuture.be/separation-of-concerns/
 
 * Type Conversions: [javascript.info/type-conversions](https://javascript.info/type-conversions)
 * Operators & Comparisons: [javascript.info/operators](https://javascript.info/operators), [javascript.info/comparison](https://javascript.info/comparison)
+* Implicit Coercion: [fcc/news/js-type-coercion](https://www.freecodecamp.org/news/js-type-coercion-explained-27ba3d9a2839/)
 * Truthiness: [janke-learning/truthiness](https://github.com/janke-learning/truthiness)
 * Loops: [javascript.info/while-for](https://javascript.info/while-for) and complete the tasks
 
 ### Integrating JavaScript
 
+* [What are Events in JS?](https://www.youtube.com/watch?v=gx0oAgvXyE4)
 * Browser Events: [javascript.info/introduction-browser-events](https://javascript.info/introduction-browser-events)
 * UI Events: [javascript.info/mouse-events-basics](https://javascript.info/mouse-events-basics)
 
@@ -45,7 +47,7 @@ Study the [Sunday lesson plan](https://hackyourfuture.be/separation-of-concerns/
 
 ## Assignments
 
-This week there is 1 project, and 4 exercise sets.
+This week there is 1 project, and 3 exercise sets.
 
 ### Project: `rock-paper-scissors-refactor`
 
@@ -78,7 +80,7 @@ What are you waiting for, get coding!
 
 ### Exercises
 
-There are 4 sets of exercises to start this week:
+There are 3 sets of exercises to start this week:
 
 * Fork [using-user-input](https://github.com/hackyourfuturebelgium/using-user-input)
   * Turn on GitHub Pages
@@ -88,8 +90,6 @@ There are 4 sets of exercises to start this week:
   * Sign into FreeCodeCamp using your GitHub Account
   * Turn on your Public Profile
   * Complete [Basic JavaScript](https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/basic-javascript/) up through [Iterate with JS do ... while loops](https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/basic-javascript/iterate-with-javascript-do...while-loops)
-  * Copy-paste each and every exercise into [JS Tutor](http://pythontutor.com/javascript.html#mode=edit) to get the most out of your studying!
-* Study the [_Debugging_ challenges](https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/debugging/) from FreeCodeCamp
   * Copy-paste each and every exercise into [JS Tutor](http://pythontutor.com/javascript.html#mode=edit) to get the most out of your studying!
 * Continue studying the exercises from in class
   * You can study them live [in the lesson plan](https://hackyourfuture.be/separation-of-concerns/week-2)

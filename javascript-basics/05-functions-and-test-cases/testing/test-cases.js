@@ -17,7 +17,7 @@ function mysteryOperator(a, b) {
 
 // you should run your tests ALL THE TIME
 //  hit "evaluate code" after every small change you make!
-testCases.forEach(function (test) {
+testCases.forEach(function evaluateTestCase(test) {
   const actual = mysteryOperator(...test.args);
   console.assert(
     actual === test.expected,

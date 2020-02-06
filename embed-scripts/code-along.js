@@ -173,7 +173,7 @@ codeAlong.setup = async (steps, config) => {
     try {
       await new Promise((resolve, reject) => {
         const aceScript = document.createElement('script');
-        aceScript.src = "../embed-scripts/ace/ace.js";
+        aceScript.src = config.acePath ? config.acePath : "../embed-scripts/ace/ace.js";
         aceScript.type = "text/javascript";
         aceScript.charset = "utf-8";
 
@@ -356,6 +356,14 @@ codeAlong.js = (iframe, steps, config) => {
   editor.setFontSize(12);
   editor.getSession().setMode('ace/mode/javascript');
   editor.getSession().setTabSize(2);
+  // editor.setShowInvisibles(true);
+  // editor.useSoftTabs(true);
+  // editor.session.setOptions({
+  //   // mode: "ace/mode/javascript",
+  //   // tabSize: 2,
+  //   useSoftTabs: true,
+  //   showInvisibles: true,
+  // });
 
 
   if (steps.length === 0) {
@@ -436,7 +444,6 @@ codeAlong.js = (iframe, steps, config) => {
   evaluateInCodeAlong.addEventListener('click', function evaluationHandler() {
     resultsContainer.innerHTML = '';
     const results = codeAlong.evaluateInCodeAlong(editor.getValue());
-    // active.results = results;
     resultsContainer.appendChild(results);
   });
 
@@ -444,9 +451,10 @@ codeAlong.js = (iframe, steps, config) => {
   evaluateInDebugger.innerHTML = 'step through in debugger';
   evaluateInDebugger.addEventListener('click', function evaluationHandler() {
     resultsContainer.innerHTML = '';
-    const results = codeAlong.evaluateInDebugger(editor.getValue());
-    // active.results = results;
-    resultsContainer.appendChild(results);
+    const allDone = codeAlong.inDebugger(editor.getValue());
+    const debuggeredEl = document.createElement('pre');
+    debuggeredEl.innerHTML = '     ' + allDone;
+    resultsContainer.appendChild(debuggeredEl);
   });
 
   const jsTutorButton = document.createElement('button');
@@ -547,19 +555,66 @@ codeAlong.js = (iframe, steps, config) => {
 
 }
 
-codeAlong.evaluateInDebugger = (src) => {
-  const debuggered = 'debugger; // injected by code-along script\n\n' + src;
+// // bad because hoisted values are in scope with source code
+// codeAlong.inDebugger = function parsing_your_code(your_source_code) {
+
+//   try {
+//     eval(
+//       'debugger; // injected by codeAlong \n'
+//       + '\n'
+//       + your_source_code
+//     );
+//   } catch (err) {
+//     console.log(err);
+//   };
+
+//   return 'All done!';
+
+// }
+
+
+// closure with hoisted values can be a bit confusing
+//  but it's the least of all evils
+//  and that could be thought of as a learning moment
+codeAlong.inDebugger = function parsing_your_code(your_source_code) {
+
   try {
-    eval(debuggered);
+    (function executing_your_code() {
+      eval(
+        'debugger; // injected by codeAlong \n'
+        + '\n'
+        + your_source_code
+      );
+    })(); // injected by codeAlong
   } catch (err) {
     console.log(err);
   };
-  const debuggeredEl = document.createElement('pre');
-  debuggeredEl.innerHTML = `      Psst. Open your DevTools!`;
-  return debuggeredEl;
+
+  return 'All done!';
+
 }
 
-codeAlong.evaluateInCodeAlong = (src) => {
+
+// // bad because of temporal dead zone
+// codeAlong.inDebugger = function parsing_your_code(your_source_code) {
+
+//   try {
+//     eval(
+//       '(function executing_your_code(){ debugger; // injected by codeAlong \n'
+//       + '\n'
+//       + your_source_code + '\n'
+//       + '\n'
+//       + '})(); // injected by codeAlong'
+//     );
+//   } catch (err) {
+//     console.log(err);
+//   };
+
+//   return 'All done!';
+
+// }
+
+codeAlong.evaluateInCodeAlong = function evaluating_your_code(your_source_code) {
   const resultsEl = document.createElement('ol');
   // console.clear();
 
@@ -611,10 +666,13 @@ codeAlong.evaluateInCodeAlong = (src) => {
 
   let didExecute = false;
   try {
-    const deDebuggered = codeAlong.deDebugger(src);
-    console.log(deDebuggered)
-    const loopDetected = codeAlong.haltingDetector.wrap(deDebuggered);
-    const toEval = '(function editor() {didExecute = true;' + loopDetected + '})();';
+    const deDebuggered = codeAlong.deDebugger(your_source_code);
+    // https://github.com/xieranmaya/infinite-loop-detector
+    const loopDetected = deDebuggered.replace(/for *\(.*\{|while *\(.*\{|do *\{/g, loopHead => {
+      const id = parseInt(Math.random() * Number.MAX_SAFE_INTEGER) // not guaranteed unique, but good enough
+      return `let __${id} = 0;${loopHead}if (++__${id} > 1000) throw new Error('Loop exceeded 1000 iterations');`
+    });
+    const toEval = '(function editor() { didExecute = true;' + loopDetected + '})();';
     eval(toEval);
   } catch (err) {
     const errOrWarning = err.message === 'Loop exceeded 1000 iterations'
@@ -649,58 +707,3 @@ codeAlong.deDebugger = code => code
   .replace(' debugger\n', '')
   .replace('\tdebugger\n', '')
   .replace('\ndebugger\n', '');
-
-
-codeAlong.haltingDetector = (() => {
-  // https://github.com/xieranmaya/infinite-loop-detector
-  // refactored to work with iterations instead of time
-
-
-  // define an haltingError class
-  class HaltingError extends Error {
-    constructor(message) {
-      super(message);
-      this.name = "HaltingError";
-    }
-  }
-
-
-  haltingDetector = (iterations) => {
-    if (iterations > 1000) {
-      throw new HaltingError('Loop exceeded 1000 iterations');
-    }
-  }
-
-
-  // // not needed, browsers already catch excessive callstacks
-  // haltingDetector.recursionDetector = (recursions) => {
-  //   if (recursions > 1000) {
-  //     throw new HaltingError('Function exceeded 1000 internal calls');
-  //   }
-  // }
-
-  haltingDetector.wrap = function (codeStr) {
-    if (typeof codeStr !== 'string') {
-      throw new Error('Can only wrap code represented by string, not any other thing at the time! If you want to wrap a function, convert it to string first.')
-    }
-    // this is not a strong regex, but enough to use at the time
-    // wraps in block to avoid redeclaring variables between attempts
-    //  uses block instead of iife to preserve line number in error read-out
-    //  and keep simpler callstack for students
-    const loopChecked = codeStr.replace(/for *\(.*\{|while *\(.*\{|do *\{/g, loopHead => {
-      const id = parseInt(Math.random() * Number.MAX_SAFE_INTEGER) // not guaranteed unique, but good enough
-      return `let __${id} = 0;${loopHead}if (++__${id} > 1000) throw new Error('Loop exceeded 1000 iterations');`
-    });
-    return loopChecked;
-    // const recursionChecked = loopChecked.replace(/for *\(.*\{|while *\(.*\{|do *\{/g, loopHead => {
-    //   const id = parseInt(Math.random() * Number.MAX_SAFE_INTEGER) // not guaranteed unique, but good enough
-    //   return `let __${id} = 0;${loopHead}codeAlong.haltingDetector.recursionDetector(++__${id});`
-    // });
-    // return recursionChecked;
-  }
-
-  haltingDetector.unwrap = function (codeStr) { }
-
-  return haltingDetector
-})();
-

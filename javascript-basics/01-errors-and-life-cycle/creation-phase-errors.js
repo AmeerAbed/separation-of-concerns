@@ -3,7 +3,7 @@
 
 const = 5;
 
-function (z) {
+function evaluateTestCase(z) {
   return z + z;
 };
 

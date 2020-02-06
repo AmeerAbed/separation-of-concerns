@@ -18,7 +18,7 @@ function one(x, y, z) {
   x = temp;
   return x + y + z;
 }
-testCases.forEach(function (test) {
+testCases.forEach(function evaluateTestCase(test) {
   console.assert(one(...test.args) === test.expected,
     '(one)' + test.name);
 });
@@ -26,7 +26,7 @@ testCases.forEach(function (test) {
 function two(x, y, z) {
   return z + y + x;
 }
-testCases.forEach(function (test) {
+testCases.forEach(function evaluateTestCase(test) {
   console.assert(two(...test.args) === test.expected,
     '(two)' + test.name);
 });

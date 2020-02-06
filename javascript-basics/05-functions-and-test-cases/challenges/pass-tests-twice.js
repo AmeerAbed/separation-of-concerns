@@ -13,7 +13,7 @@ const testCases = [
 function one() {
 
 }
-testCases.forEach(function (test) {
+testCases.forEach(function evaluateTestCase(test) {
   console.assert(one(...test.args) === test.expected,
     '(one)' + test.name);
 });
@@ -22,7 +22,7 @@ testCases.forEach(function (test) {
 function two() {
 
 }
-testCases.forEach(function (test) {
+testCases.forEach(function evaluateTestCase(test) {
   console.assert(two(...test.args) === test.expected,
     '(two)' + test.name);
 });
