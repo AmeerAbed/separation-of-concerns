@@ -47,7 +47,7 @@ Open In JSHint: opens your code in an online Linter that will ---
     ... warn about possible runtime errors
     ... evaluate the complexity of your code
 Format Code: will make code in the current editor prettier ---
-    ... make your code easier to read
+    ... makes your code easier to read
 `;
 
 

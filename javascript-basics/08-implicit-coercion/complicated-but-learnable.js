@@ -9,14 +9,15 @@ const plusTests = [
   { name: 'number, boolean', args: [1, true], expected: 2 },
   { name: 'number, null', args: [1, null], expected: 1 },
   { name: 'number, undefined', args: [1, undefined], expected: NaN },
-  // can you find any failing tests?
-  { name: '', args: [], expected: null },
-  { name: '', args: [], expected: null },
-  { name: '', args: [], expected: null },
+  // can you find any test cases that only one function passes?
+  { name: '?', args: [], expected: null },
+  { name: '?', args: [], expected: null },
 ];
+
 function plus(a, b) {
   return a + b;
 }
+
 // this functions explains the rules of implicit coercion for +
 //  once you understand the logic in this function,
 //  you have understood implicit coercion with + and primitive types
@@ -27,16 +28,17 @@ function replication(x, y) {
     return Number(x) + Number(y);
   }
 }
-// these tests pass when BOTH functions pass the test
+// test both functions with the same test cases
 plusTests.forEach(function evaluateTestCase(test) {
   const expectedNaN = Number.isNaN(test.expected);
   const plusPasses = expectedNaN
     ? Number.isNaN(plus(...test.args))
     : test.expected === plus(...test.args);
+  console.assert(plusPasses, test.name + ' - plus');
   const replicationPasses = expectedNaN
     ? Number.isNaN(replication(...test.args))
     : test.expected === replication(...test.args);
-  console.assert(plusPasses && replicationPasses, test.name);
+  console.assert(replicationPasses, test.name + ' - replication');
 })
 
 // PS. this replication only works with primitives!
