@@ -15,8 +15,8 @@ const testCases = [
 ]
 
 function typo(x, y) {
-  const typeofX = typeof y;
-  const typeofY = typeof x;
+  const typeofX = typeof x;
+  const typeofY = typeof y;
   const areEqual = x === y;
   return `(${typeofX === typeofY}) ${x}, ${y} (${areEqual})`;
 }
