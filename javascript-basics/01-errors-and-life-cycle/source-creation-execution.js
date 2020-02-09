@@ -29,7 +29,7 @@
 //  To find & fix your execution phase errors you can
 //    - study your code in JS Tutor or JSHint
 //  or you can practice debugging with the console:
-//    1. in the most recent error message find the line called "editor"
+//    1. find the top most line under the name of the error
 //    2. find the two numbers at the far right of the line -> x:y
-//    3. these are the line and the character where your error occured
-//    4. now you know where it occured, google your error!
+//    3. these are the line and the character where your error occurred
+//    4. now you know where it occurred, google your error!

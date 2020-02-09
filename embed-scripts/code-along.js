@@ -6,7 +6,7 @@
     source: 'undefined -> empty code-along. string -> fetch from relative path. object -> name & path. array of strings or objects -> tabbed the-previous-things'
   }
 
-  const resultSchema = {
+  const resultSchema = { // future plans
     config: 'the unmodified config object',
     container: "element with input & output containers",
     editor: 'ace editor',
@@ -28,27 +28,27 @@
 }
 
 // do this with highlight.js? - nope, then extra dependency
-const codeAlongGuide = `
-evaluate code: will run the code in the current editor ---
+const codeAlongGuide = `evaluate code: will run the code in the current editor ---
     ... capture asserts to display pass/fail
-    ... stop your code after 1000+ loop iterations
-    ... produce helpful callstacks
+    ... try to stop your code after 1000+ loop iterations
+    ... generate a search link for your errors
     ... indicate if errors were Creation or Execution phase
     ... remove all debugger statements
-step through in Debugger: will run the current editor ---
+step through in debugger: will run the current editor ---
     ... insert a debugger statement before the first line
-    ... your devtools must be open for this to work
-Format Code: will make code in the current editor prettier ---
+    ... try to guard against infinite loops
+with infinite loop guard: will run the current editor ---
+    ... like above, but with infinite loop protection
 Open In Js Tutor: will open the current code in JS Tutor ---
-    ... it will step through your code's execution line by line
-    ... shows what is happening in programming memory
-    ... will help understand errors, including creation/execution
     ... use this button ALL THE TIME!
 Open In JSHint: opens your code in an online Linter that will ---
     ... point out syntax errors
     ... warn about some bad practices
     ... warn about possible runtime errors
     ... evaluate the complexity of your code
+Format Code: will make code in the current editor prettier ---
+    ... make your code easier to read
+    ... help to guard against infinite loops
 `;
 
 
@@ -92,7 +92,60 @@ async function codeAlong(config) {
     }
   })();
 
-  const steps = await (async () => {
+
+  const steps = [];
+
+  const iframe = await codeAlong.createIframe(config);
+  container.appendChild(iframe);
+
+  const loadButton = document.createElement('button');
+  loadButton.innerHTML = 'click to load code-along';
+  loadButton.onclick = async () => {
+    iframe.contentDocument.body.style = '';
+    iframe.contentDocument.body.innerHTML = '';
+    try {
+      await new Promise((resolve, reject) => {
+        const aceScript = document.createElement('script');
+        aceScript.src = config.acePath ? config.acePath : "../embed-scripts/ace/ace.js";
+        aceScript.type = "text/javascript";
+        aceScript.charset = "utf-8";
+
+        aceScript.addEventListener('load', () => {
+          resolve();
+          codeAlong.theRest(config, steps, iframe);
+        });
+        aceScript.addEventListener('error', (e) => reject(e.message))
+
+        iframe.contentDocument.head.appendChild(aceScript);
+      });
+    } catch (err) { console.log(err) };
+  }
+
+  const tempHeader = document.createElement('h1');
+  tempHeader.innerHTML = config.title ? config.title : '';
+
+  iframe.contentDocument.body.style = 'position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;';
+  iframe.contentDocument.body.appendChild(tempHeader);
+  iframe.contentDocument.body.appendChild(loadButton);
+
+  return { steps, container };
+
+}
+
+codeAlong.createIframe = async () => {
+
+  const result = {};
+
+  const iframe = document.createElement('iframe');
+  iframe.style = 'height:93vh;width:100%;overflow:hidden;background-color:white;';
+  iframe.setAttribute('scrolling', 'no');
+  result.iframe = iframe;
+  return iframe;
+
+}
+
+codeAlong.theRest = async (config, steps, iframe) => {
+  const builtSteps = await (async () => {
     if (!config || !config.source) return [];
 
     const fetchSource = async path => {
@@ -138,66 +191,22 @@ async function codeAlong(config) {
     }
   })();
 
-
-  // { iframe  }
-  const setup = await codeAlong.setup(steps, config);
-  container.appendChild(setup);
+  builtSteps.forEach(step => steps.push(step));
 
 
-  return { steps, container };
-
-
-
-  // return {
-  //   config,
-  //   container,
-  //   editor: setup.editor,
-  //   resultsEl,
-  //   steps
-  // };
-
-}
-
-codeAlong.setup = async (steps, config) => {
-
-  const result = {};
-
-  const iframe = document.createElement('iframe');
-  iframe.style = 'height:93vh;width:100%;overflow:hidden;background-color:white;';
-  iframe.setAttribute('scrolling', 'no');
-  result.iframe = iframe;
-
-
-  iframe.onload = async () => {
-
-    try {
-      await new Promise((resolve, reject) => {
-        const aceScript = document.createElement('script');
-        aceScript.src = config.acePath ? config.acePath : "../embed-scripts/ace/ace.js";
-        aceScript.type = "text/javascript";
-        aceScript.charset = "utf-8";
-
-        aceScript.addEventListener('load', () => resolve());
-        aceScript.addEventListener('error', (e) => reject(e.message))
-
-        iframe.contentDocument.head.appendChild(aceScript);
-      });
-    } catch (err) { console.log(err) };
-
-    // async total side-effect
-    if (config.type === 'document') {
-      codeAlong.document(iframe, steps, config);
-    } else if (config.type === 'js' || config.type === 'javascript') {
-      codeAlong.js(iframe, steps, config);
-    } else {
-      codeAlong.js(iframe, steps, config);
-    }
-
+  // async total side-effect
+  if (config.type === 'document') {
+    codeAlong.document(iframe, steps, config);
+  } else if (config.type === 'js' || config.type === 'javascript') {
+    codeAlong.js(iframe, steps, config);
+  } else {
+    codeAlong.js(iframe, steps, config);
   }
 
-  return iframe;
-
+  // const setup = await codeAlong.setup(steps, config);
+  // container.appendChild(setup);
 }
+
 
 codeAlong.document = (iframe, steps, config) => {
   const title = config.title;
@@ -208,6 +217,7 @@ codeAlong.document = (iframe, steps, config) => {
   editorContainer.style = 'height:98vh;width:55vw;';
 
   const ace = iframe.contentWindow.ace;
+  // ace.require("ace/ext/language_tools");
   const editor = ace.edit(editorContainer);
   // editor.setTheme('ace/theme/iplastic'); // lack of color outweighs yellow open/close
   // editor.setTheme('ace/theme/dawn');
@@ -216,6 +226,11 @@ codeAlong.document = (iframe, steps, config) => {
   editor.setFontSize(12);
   editor.getSession().setMode('ace/mode/html');
   editor.getSession().setTabSize(2);
+  // editor.setOptions({
+  //   enableBasicAutocompletion: true,
+  //   enableSnippets: true,
+  //   enableLiveAutocompletion: true
+  // });
 
   if (steps.length === 0) {
     const defaultCode = "// https://developer.mozilla.org/en-US/docs/Web/API/Console/assert\n" +
@@ -237,7 +252,7 @@ codeAlong.document = (iframe, steps, config) => {
     editorContainer.style = 'height:92vh;width:55vw;';
     const stepButtons = steps.map((step, index) => {
       const button = document.createElement('button');
-      button.style.height = '30px'; // provisoire
+      button.style.height = '5%'; // provisoire
       button.style.background = '';
       const name = step.name ? step.name : 'step ' + index;
       button.innerHTML = name;
@@ -386,10 +401,10 @@ codeAlong.js = (iframe, steps, config) => {
 
 
   if (steps.length > 1) {
-    editorContainer.style = 'height:90vh;width:55vw;';
+    editorContainer.style = 'height:92vh;width:55vw;';
     const stepButtons = steps.map((step, index) => {
       const button = document.createElement('button');
-      button.style = 'height:35px;';
+      button.style = 'height:5%;';
       const name = step.name ? step.name : 'step ' + index;
       // to preserve formatting in step title
       const code = document.createElement('code');
@@ -441,21 +456,42 @@ codeAlong.js = (iframe, steps, config) => {
 
   const evaluateInCodeAlong = document.createElement('button');
   evaluateInCodeAlong.innerHTML = 'evaluate code';
-  evaluateInCodeAlong.addEventListener('click', function evaluationHandler() {
+  evaluateInCodeAlong.addEventListener('click', function evaluateCode() {
     resultsContainer.innerHTML = '';
-    const results = codeAlong.evaluateInCodeAlong(editor.getValue());
+    const results = codeAlong.preparing_your_code(editor.getValue());
     resultsContainer.appendChild(results);
   });
 
   const evaluateInDebugger = document.createElement('button');
   evaluateInDebugger.innerHTML = 'step through in debugger';
-  evaluateInDebugger.addEventListener('click', function evaluationHandler() {
+  evaluateInDebugger.addEventListener('click', function step_through_in_debugger() {
     resultsContainer.innerHTML = '';
-    const allDone = codeAlong.inDebugger(editor.getValue());
+    const allDone = codeAlong.step_through_in_debugger(editor.getValue());
     const debuggeredEl = document.createElement('pre');
-    debuggeredEl.innerHTML = '     ' + allDone;
+    debuggeredEl.innerHTML = allDone;
     resultsContainer.appendChild(debuggeredEl);
   });
+
+  const withLoopGuard = document.createElement('input');
+  withLoopGuard.setAttribute('type', 'button');
+  withLoopGuard.value = '.. with max iterations = ';
+  withLoopGuard.addEventListener('click', function with_infinite_loop_guard(event) {
+    resultsContainer.innerHTML = '';
+    const max = Number(event.target.form.max.value);
+    const allDone = codeAlong.with_infinite_loop_guard(editor.getValue(), max);
+    const debuggeredEl = document.createElement('pre');
+    debuggeredEl.innerHTML = allDone;
+    resultsContainer.appendChild(debuggeredEl);
+  });
+  const maxIterationsInput = document.createElement('input');
+  maxIterationsInput.value = 50;
+  maxIterationsInput.name = 'max';
+  maxIterationsInput.style = 'width:3em';
+
+  const maxIterationsForm = document.createElement('form');
+  maxIterationsForm.style = 'display:inline;';
+  maxIterationsForm.appendChild(withLoopGuard);
+  maxIterationsForm.appendChild(maxIterationsInput);
 
   const jsTutorButton = document.createElement('button');
   jsTutorButton.innerHTML = 'open in JS Tutor';
@@ -485,23 +521,13 @@ codeAlong.js = (iframe, steps, config) => {
   buttonsButton.innerHTML = 'so many buttons?';
   buttonsButton.onclick = () => alert(codeAlongGuide);
 
-  {/* build parsonizer button
-        const parsonizerButton = document.createElement('button');
-        parsonizerButton.innerHTML = 'Parsonzier';
-        parsonizerButton.onclick = () => {
-          const encoded = encodeURIComponent(editor.getValue());
-          const sanitized = encoded
-            .replace(/\(/g, '%28').replace(/\)/g, '%29')
-            .replace(/%09/g, '%20%20');
-          const parsonsURL = "http://janke-learning.org/parsonizer/?snippet=" + sanitized;
-          window.open(parsonsURL, '_blank');
-        }
-      */}
-
   const buttonDiv = document.createElement('div');
   buttonDiv.style = 'margin-top:2%;margin-bottom:2%;text-align:center;';
   buttonDiv.appendChild(evaluateInCodeAlong);
   buttonDiv.appendChild(evaluateInDebugger);
+  buttonDiv.appendChild(maxIterationsForm);
+  buttonDiv.appendChild(document.createElement('br'));
+  buttonDiv.appendChild(jsTutorButton);
   try {
     // does it exist?
     js_beautify('', {
@@ -520,11 +546,9 @@ codeAlong.js = (iframe, steps, config) => {
     });
     buttonDiv.appendChild(formatCode);
   } catch (e) { }
-  buttonDiv.appendChild(document.createElement('br'));
-  buttonDiv.appendChild(jsTutorButton);
+
   buttonDiv.appendChild(linterButton);
   buttonDiv.appendChild(buttonsButton);
-  // buttonDiv.appendChild(parsonizerButton);
 
 
   resultsContainer.id = '\n-- assertions --\n';
@@ -555,6 +579,36 @@ codeAlong.js = (iframe, steps, config) => {
 
 }
 
+codeAlong.step_through_in_debugger = function in_debugger(your_source_code) {
+  try {
+    eval(
+      'debugger; // injected by codeAlong ->  error messages will be off by 2 lines\n'
+      + '\n'
+      + your_source_code
+    );
+  } catch (err) {
+    console.log(err);
+  };
+  return "     All done! \n\n     (psst. try again with devtools open if they aren't already)";
+}
+
+codeAlong.with_infinite_loop_guard = function with_infinite_loop_guard(your_source_code, max) {
+  let loopNumber = 0;
+  try {
+    eval(
+      'debugger; // injected by codeAlong ->  error messages will be off by 2 lines\n'
+      + '\n'
+      + your_source_code.replace(/for *\(.*\{|while *\(.*\{|do *\{/g, loopHead => {
+        loopNumber++;
+        return `let _loop${loopNumber} = 0; ${loopHead} if (++_loop${loopNumber} > ${max}) throw new Error('Loop exceeded ${max} iterations');`
+      })
+    );
+  } catch (err) {
+    console.log(err);
+  };
+  return "     All done! \n\n     (psst. try again with devtools open if they aren't already)";
+}
+
 // // bad because hoisted values are in scope with source code
 // codeAlong.inDebugger = function parsing_your_code(your_source_code) {
 
@@ -573,34 +627,36 @@ codeAlong.js = (iframe, steps, config) => {
 // }
 
 
-// closure with hoisted values can be a bit confusing
-//  but it's the least of all evils
-//  and that could be thought of as a learning moment
-codeAlong.inDebugger = function parsing_your_code(your_source_code) {
+// // closure with hoisted values can be a bit confusing
+// //  but it's the least of all evils
+// //  and that could be thought of as a learning moment
+// // no! announces execution even when syntax errors
+// codeAlong.inDebugger = function parsing_your_code(your_source_code) {
 
-  try {
-    (function executing_your_code() {
-      eval(
-        'debugger; // injected by codeAlong \n'
-        + '\n'
-        + your_source_code
-      );
-    })(); // injected by codeAlong
-  } catch (err) {
-    console.log(err);
-  };
+//   try {
+//     (function executing_your_code() {
+//       eval(
+//         'debugger; // injected by codeAlong -> error messages will be off by 2 lines \n'
+//         + '\n'
+//         + your_source_code
+//       );
+//     })(); // injected by codeAlong
+//   } catch (err) {
+//     console.log(err);
+//   };
 
-  return 'All done!';
+//   return 'All done!';
 
-}
+// }
 
 
-// // bad because of temporal dead zone
+// // bad because of temporal dead zone and extra iffe in debugger
 // codeAlong.inDebugger = function parsing_your_code(your_source_code) {
 
 //   try {
 //     eval(
-//       '(function executing_your_code(){ debugger; // injected by codeAlong \n'
+//       '(function executing_your_code(){\n'
+//       + 'debugger; // injected by codeAlong -> error messages will be off by 3 lines\n'
 //       + '\n'
 //       + your_source_code + '\n'
 //       + '\n'
@@ -614,7 +670,7 @@ codeAlong.inDebugger = function parsing_your_code(your_source_code) {
 
 // }
 
-codeAlong.evaluateInCodeAlong = function evaluating_your_code(your_source_code) {
+codeAlong.preparing_your_code = function (your_source_code) {
   const resultsEl = document.createElement('ol');
   // console.clear();
 
@@ -648,7 +704,15 @@ codeAlong.evaluateInCodeAlong = function evaluating_your_code(your_source_code) 
   const renderError = (err) => {
     const errorEl = document.createElement('pre');
     errorEl.style.color = "red";
-    errorEl.innerHTML = err.name + ': ' + err.message + '\n\n   callstack is logged to the console';
+    const duckDuckLink = document.createElement('a');
+    duckDuckLink.innerHTML = '<strong>' + err.name + '</strong>: ' + err.message + ' (click to search)';
+    duckDuckLink.href = `https://duckduckgo.com/?q=javascript+${err.name}+${err.message}&atb=v185-2_d&ia=web`;
+    duckDuckLink.target = '_blank';
+    duckDuckLink.style.color = 'red';
+    const searchButton = document.createElement('button');
+    searchButton.appendChild(duckDuckLink)
+    errorEl.appendChild(searchButton);
+    errorEl.appendChild(document.createTextNode('\n\n   callstack is logged to the console'));
     return errorEl;
   }
   const renderHaltingWarning = (err) => {
@@ -659,12 +723,12 @@ codeAlong.evaluateInCodeAlong = function evaluating_your_code(your_source_code) 
   }
   const renderPhase = didExecute => {
     const phaseEl = document.createElement('pre');
-    const phase = didExecute ? 'Execution Phase' : "Creation Phase"
+    const phase = didExecute.status ? 'Execution Phase' : "Creation Phase"
     phaseEl.innerHTML = '   caught during ' + phase;
     return phaseEl;
   }
 
-  let didExecute = false;
+  const didExecute = { status: false };
   try {
     const deDebuggered = codeAlong.deDebugger(your_source_code);
     // https://github.com/xieranmaya/infinite-loop-detector
@@ -672,8 +736,9 @@ codeAlong.evaluateInCodeAlong = function evaluating_your_code(your_source_code) 
       const id = parseInt(Math.random() * Number.MAX_SAFE_INTEGER) // not guaranteed unique, but good enough
       return `let __${id} = 0;${loopHead}if (++__${id} > 1000) throw new Error('Loop exceeded 1000 iterations');`
     });
-    const toEval = '(function editor() { didExecute = true;' + loopDetected + '})();';
-    eval(toEval);
+    (function editor() {
+      eval('(function executing_prepared_code() { didExecute.status = true;' + loopDetected + '})();');
+    })();
   } catch (err) {
     const errOrWarning = err.message === 'Loop exceeded 1000 iterations'
       ? renderHaltingWarning(err)
@@ -691,19 +756,19 @@ codeAlong.evaluateInCodeAlong = function evaluating_your_code(your_source_code) 
 }
 
 codeAlong.deDebugger = code => code
-  .replace(';debugger;', '')
-  .replace(' debugger;', '')
-  .replace('\tdebugger;', '')
-  .replace('\ndebugger;', '')
-  .replace(';debugger ', '')
-  .replace(' debugger ', '')
-  .replace('\tdebugger ', '')
-  .replace('\ndebugger ', '')
-  .replace(';debugger\t', '')
-  .replace(' debugger\t', '')
-  .replace('\tdebugger\t', '')
-  .replace('\ndebugger\t', '')
-  .replace(';debugger\n', '')
-  .replace(' debugger\n', '')
-  .replace('\tdebugger\n', '')
-  .replace('\ndebugger\n', '');
+  .replace(';debugger;', ';;')
+  .replace(' debugger;', ' ;')
+  .replace('\tdebugger;', '\t;')
+  .replace('\ndebugger;', '\n;')
+  .replace(';debugger ', '; ')
+  .replace(' debugger ', '  ')
+  .replace('\tdebugger ', '\t ')
+  .replace('\ndebugger ', '\n ')
+  .replace(';debugger\t', ';\t')
+  .replace(' debugger\t', ' \t')
+  .replace('\tdebugger\t', '\t\t')
+  .replace('\ndebugger\t', '\n\t')
+  .replace(';debugger\n', ';\n')
+  .replace(' debugger\n', ' \n')
+  .replace('\tdebugger\n', '\t\n')
+  .replace('\ndebugger\n', '\n\n');

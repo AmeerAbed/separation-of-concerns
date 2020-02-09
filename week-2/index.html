@@ -91,9 +91,7 @@
             <li>DevTools Debugger vs. JS Tutor</li>
             <li>Explicit Type Coercion</li>
             <li>Truthiness & Boolean Operators</li>
-            <li>Implicit Coercion (at home)</li>
-            <li>Operator Precedence (at home)</li>
-            <li>Conditionals (at home)</li>
+            <li>Block Scope</li>
             <li>Loops</li>
           </ul>
         </section>
@@ -141,7 +139,7 @@
         <section>
           <h2>Stepping Through</h2>
           <br>
-          <h3>also "tracing"</h3>
+          <h3>or "tracing"</h3>
           <br>
           <code>(in class)</code>
         </section>
@@ -295,7 +293,7 @@
               source: [
                 {
                   name: 'String -> Number -> String',
-                  path: '../javascript-basics/03-primitive-types-and-values/challenges/string-number-string.js'
+                  path: '../javascript-basics/06-type-coercion/challenges/string-number-string.js'
                 }
               ]
             })
@@ -307,8 +305,7 @@
         <section>
           <h2>Truthiness</h2>
           <br>
-          <!-- <p>Does it cast to <code>true</code> or <code>false</code>?</p> -->
-          <p>It's how Boolean Operators work.</p>
+          <p>Does it cast to <code>true</code> or <code>false</code>?</p>
           <br>
           <code>(at home)</code>
         </section>
@@ -336,9 +333,6 @@
             <li><a href='https://javascript.info/logical-operators' target='_blank'>
                 javascript.info/logical-operators
               </a></li>
-            <!-- <li><a href='https://www.freecodecamp.org/news/js-type-coercion-explained-27ba3d9a2839/' target='_blank'>
-                FCC: type coercion explained
-              </a></li> -->
             <li><a href='https://github.com/janke-learning/truthiness' target='_blank'>
                 janke-learning/truthiness
               </a></li>
@@ -399,15 +393,15 @@
               source: [
                 {
                   name: 'Type or Value',
-                  path: '../javascript-basics/07-truthiness/boolean-operators/challenges/type-or-value.js'
+                  path: '../javascript-basics/07-truthiness/challenges/type-or-value.js'
                 },
                 {
                   name: 'Demorgan\'s Law',
-                  path: '../javascript-basics/07-truthiness/boolean-operators/challenges/demorgans-law.js'
+                  path: '../javascript-basics/07-truthiness/challenges/demorgans-law.js'
                 },
                 {
                   name: 'Pass Some Tests!',
-                  path: '../javascript-basics/07-truthiness/boolean-operators/challenges/pass-some-tests.js'
+                  path: '../javascript-basics/07-truthiness/challenges/pass-some-tests.js'
                 },
               ]
             })
@@ -419,85 +413,137 @@
         <section>
           <h2>Implicit Coercions</h2>
           <br>
-          <p>The invisible step behind JS operators</p>
+          <p>The invisible steps behind JS operators</p>
           <br>
           <code>(at home)</code>
         </section>
         <section>
           <h3>Code-Alongs</h3>
-          <p>Operators</p>
+          <p>Implicit Coercion</p>
           <br>
           <ul>
-            <li><a href='#string-coercion'>
-                Values have the same type
+            <li><a href='#complicated-but-learnable'>
+                Complicated but Learnable
               </a></li>
-            <li><a href='#boolean-coercion'>
-                Boolean
+            <li><a href='#not-not-not'>
+                ! and !!
               </a></li>
-            <li><a href='#number-coercion'>
-                Number
+            <li><a href='#arithmetic-operators'>
+                Arithmetic Operators
               </a></li>
-            <li><a href='#coercion-challenges'>
-                Challenges
+            <li><a href='#comparisons'>
+                Comparisons
               </a></li>
           </ul>
         </section>
         <section>
           <h3>Helpful Links</h3>
-          <p>Operators</p>
+          <p>Implicit Coercion</p>
           <br>
           <ul>
-            <li><a href='https://javascript.info/type-conversions' target='_blank'>
-                javascript.info/type-conversions
+            <li><a href='https://javascript.info/operators' target='_blank'>
+                javascript.info/operators
               </a></li>
-            <li><a href='https://www.freecodecamp.org/news/js-type-coercion-explained-27ba3d9a2839/' target='_blank'>
-                FCC: type coercion explained
+            <li><a href='https://javascript.info/comparison' target='_blank'>
+                javascript.info/comparison
               </a></li>
-            <li><a href='https://programmingsoup.com/article/javascript-coercion' target='_blank'>
-                programmingsoup: javascript coercion
+            <li><a href='https://github.com/janke-learning/implicit-coercion' target='_blank'>
+                janke-learning/implicit-coercion
+              </a></li>
+            <li><a href='https://dorey.github.io/JavaScript-Equality-Table/' target='_blank'>
+                dorey.github.io/JavaScript-Equality-Table/
+              </a></li>
+            <li>interactive tables: <a href='https://janke-learning.org/equalities-coercion/' target='_blank'>
+                equalities coercion
+              </a>, <a href='https://janke-learning.org/arithmetic-coercion/' target='_blank'>
+                arithmetic coercion
               </a></li>
           </ul>
         </section>
-        <section id='string-coercion'>
+        <section id='complicated-but-learnable'>
           <script>
             codeAlong({
-              title: 'Coercion to String',
-              container: 'string-coercion',
+              title: 'Complicated but Learnable',
+              container: 'complicated-but-learnable',
               type: 'js',
               source: [
+                {
+                  name: '+',
+                  path: '../javascript-basics/08-implicit-coercion/complicated-but-learnable.js'
+                },
+                {
+                  name: '==',
+                  path: '../javascript-basics/08-implicit-coercion/loose-equality.js'
+                },
+                {
+                  name: 'Super Challenge!',
+                  path: '../javascript-basics/08-implicit-coercion/super-challenge.js'
+                },
               ]
             })
           </script>
         </section>
-        <section id='boolean-coercion'>
+        <section id='not-not-not'>
           <script>
             codeAlong({
-              title: 'Coercing to Boolean',
-              container: 'boolean-coercion',
+              title: '! and !!',
+              container: 'not-not-not',
               type: 'js',
               source: [
+                {
+                  name: '!',
+                  path: '../javascript-basics/08-implicit-coercion/nots/not.js'
+                },
+                {
+                  name: '!!',
+                  path: '../javascript-basics/08-implicit-coercion/nots/not-not.js'
+                },
               ]
             })
           </script>
         </section>
-        <section id='number-coercion'>
+        <section id='arithmetic-operators'>
           <script>
             codeAlong({
-              title: 'Coercing to Number',
-              container: 'number-coercion',
+              title: 'Arithmetic Operators',
+              container: 'arithmetic-operators',
               type: 'js',
               source: [
+                {
+                  name: 'a - b',
+                  path: '../javascript-basics/08-implicit-coercion/arithmetic-operators/minus.js'
+                },
+                {
+                  name: 'a * b',
+                  path: '../javascript-basics/08-implicit-coercion/arithmetic-operators/multiplication.js'
+                },
+                {
+                  name: 'a % b',
+                  path: '../javascript-basics/08-implicit-coercion/arithmetic-operators/modulo.js'
+                },
+                {
+                  name: '-a',
+                  path: '../javascript-basics/08-implicit-coercion/arithmetic-operators/unary-minus.js'
+                },
               ]
             })
           </script>
         </section>
-        <section id='coercion-challenges'>
+        <section id='comparisons'>
           <script>
             codeAlong({
-              title: 'Coercion Challenges',
-              container: 'coercion-challenges',
+              title: 'Comparisons',
+              container: 'comparisons',
               type: 'js',
               source: [
+                {
+                  name: 'a < b',
+                  path: '../javascript-basics/08-implicit-coercion/comparisons/less-than.js'
+                },
+                {
+                  name: 'a > b',
+                  path: '../javascript-basics/08-implicit-coercion/comparisons/greater-than.js'
+                },
               ]
             })
           </script>
@@ -512,29 +558,581 @@
           <br>
           <code>(at home)</code>
         </section>
+        <section>
+          <h3>Code-Alongs</h3>
+          <p>Operator Precedence</p>
+          <br>
+          <ul>
+            <li><a href='#expanding'>
+                Expanding
+              </a></li>
+            <li><a href='#types-and-casting'>
+                Types and Casting
+              </a></li>
+            <li><a href='#expanding-logical-operators'>
+                Logical Operators
+              </a></li>
+            <li><a href='#expanding-arithmetic-operators'>
+                Arithmetic Operators
+              </a></li>
+            <li><a href='#all-together'>
+                All Together
+              </a></li>
+          </ul>
+        </section>
+        <section>
+          <h3>Helpful Links</h3>
+          <p>Operator Precedence</p>
+          <br>
+          <ul>
+            <li><a href='https://javascript.info/operators#operator-precedence' target='_blank'>
+                javascript.info/operators#operator-precedence
+              </a></li>
+            <li><a
+                href='https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_Precedence'
+                target='_blank'>
+                MDN: operator precedence
+              </a></li>
+            <li><a href='http://www.scriptingmaster.com/javascript/operator-precedence.asp' target='_blank'>
+                scriptingmaster/javascript/operator-precedence
+              </a></li>
+            <li><a href='https://www.youtube.com/results?search_query=javascript+operator+precedence' target='_blank'>
+                YouTube
+              </a></li>
+            <li><a href='https://github.com/janke-learning/expanding/blob/master/worked-expressions.md' target='_blank'>
+                Expanding Expressions
+              </a></li>
+          </ul>
+        </section>
+        <section id='expanding'>
+          <script>
+            codeAlong({
+              title: 'Expanding Expressions',
+              container: 'expanding',
+              type: 'js',
+              source: [
+                {
+                  name: 'Expanding',
+                  path: '../javascript-basics/09-operator-precedence/expanding.js'
+                },
+                {
+                  name: 'Arrow Functions: () =>  ',
+                  path: '../javascript-basics/09-operator-precedence/arrow-functions.js'
+                },
+                {
+                  name: 'Truthiness',
+                  path: '../javascript-basics/09-operator-precedence/is-it-truthy.js'
+                },
+              ]
+            })
+          </script>
+        </section>
+        <section id='types-and-casting'>
+          <script>
+            codeAlong({
+              title: 'Types & Casting',
+              container: 'types-and-casting',
+              type: 'js',
+              source: [
+                {
+                  name: 'Exercise 1',
+                  path: '../javascript-basics/09-operator-precedence/types-and-casting/exercise-1.js'
+                },
+                {
+                  name: 'Exercise 2',
+                  path: '../javascript-basics/09-operator-precedence/types-and-casting/exercise-2.js'
+                },
+                {
+                  name: 'Exercise 3',
+                  path: '../javascript-basics/09-operator-precedence/types-and-casting/exercise-3.js'
+                },
+              ]
+            })
+          </script>
+        </section>
+        <section id='expanding-logical-operators'>
+          <script>
+            codeAlong({
+              title: 'Logical Operators',
+              container: 'expanding-logical-operators',
+              type: 'js',
+              source: [
+                {
+                  name: 'Exercise 1',
+                  path: '../javascript-basics/09-operator-precedence/logical-operators/exercise-1.js'
+                },
+                {
+                  name: 'Exercise 2',
+                  path: '../javascript-basics/09-operator-precedence/logical-operators/exercise-2.js'
+                },
+                {
+                  name: 'Exercise 3',
+                  path: '../javascript-basics/09-operator-precedence/logical-operators/exercise-3.js'
+                },
+              ]
+            })
+          </script>
+        </section>
+        <section id='expanding-arithmetic-operators'>
+          <script>
+            codeAlong({
+              title: 'Arithmetic Operators',
+              container: 'expanding-arithmetic-operators',
+              type: 'js',
+              source: [
+                {
+                  name: 'Exercise 1',
+                  path: '../javascript-basics/09-operator-precedence/logical-operators/exercise-1.js'
+                },
+                {
+                  name: 'Exercise 2',
+                  path: '../javascript-basics/09-operator-precedence/logical-operators/exercise-2.js'
+                },
+                {
+                  name: 'Exercise 3',
+                  path: '../javascript-basics/09-operator-precedence/logical-operators/exercise-3.js'
+                },
+              ]
+            })
+          </script>
+        </section>
+        <section id='all-together'>
+          <script>
+            codeAlong({
+              title: 'All Together',
+              container: 'all-together',
+              type: 'js',
+              source: [
+                {
+                  name: 'Exercise 1',
+                  path: '../javascript-basics/09-operator-precedence/all-together/exercise-1.js'
+                },
+                {
+                  name: 'Exercise 2',
+                  path: '../javascript-basics/09-operator-precedence/all-together/exercise-2.js'
+                },
+                {
+                  name: 'Exercise 3',
+                  path: '../javascript-basics/09-operator-precedence/all-together/exercise-3.js'
+                },
+                {
+                  name: 'Exercise 4',
+                  path: '../javascript-basics/09-operator-precedence/all-together/exercise-4.js'
+                },
+                {
+                  name: 'Exercise 5',
+                  path: '../javascript-basics/09-operator-precedence/all-together/exercise-5.js'
+                },
+              ]
+            })
+          </script>
+        </section>
+      </section>
+
+      <section id='block-scope'>
+        <section>
+          <h2>Block Scope</h2>
+          <br>
+          <p>A deeper dive into variables</p>
+          <br>
+          <code>(in class)</code>
+        </section>
+        <section>
+          <h3>Code-Alongs</h3>
+          <p>Block Scope</p>
+          <br>
+          <ul>
+            <li><a href='#block-scope-intro'>
+                Intro
+              </a></li>
+            <li><a href='#block-scope-challenges'>
+                Challenges
+              </a></li>
+          </ul>
+        </section>
+        <section>
+          <h3>Helpful Links</h3>
+          <p>Block Scope</p>
+          <br>
+          <ul>
+            <li><a href='https://wesbos.com/javascript-scoping/' target='_blank'>
+                <code>let</code> & <code>const</code> block scoping
+              </a></li>
+            <li><a href='https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/block'
+                target='_blank'>
+                MDN: Block Scope
+              </a></li>
+            <li><a href='https://github.com/janke-learning/undeclared-variables' target='_blank'>
+                undeclared vs. undefined
+              </a></li>
+            <li><a href='https://2ality.com/2015/10/why-tdz.html' target='_blank'>
+                (bonus) temporal dead zone
+              </a></li>
+            <li><a href='https://github.com/janke-learning/strict-mode' target='_blank'>
+                (bonus) strict mode
+              </a></li>
+          </ul>
+        </section>
+        <section id='block-scope-intro'>
+          <script>
+            codeAlong({
+              title: 'Block Scope Intro',
+              container: 'block-scope-intro',
+              type: 'js',
+              source: [
+                {
+                  name: 'Block Scope',
+                  path: '../javascript-basics/10-block-scope/block-scope.js'
+                },
+                {
+                  name: 'Temporal Dead Zone',
+                  path: '../javascript-basics/10-block-scope/temporal-dead-zone.js'
+                },
+                {
+                  name: 'var (footnote)',
+                  path: '../javascript-basics/10-block-scope/var-footnote.js'
+                },
+              ]
+            })
+          </script>
+        </section>
+        <section id='block-scope-challenges'>
+          <script>
+            codeAlong({
+              title: 'Block Scope Challenges',
+              container: 'block-scope-challenges',
+              type: 'js',
+              source: [
+                {
+                  name: 'Assert Values',
+                  path: '../javascript-basics/10-block-scope/challenges/1-assert-values.js'
+                },
+                {
+                  name: 'Assert Variables',
+                  path: '../javascript-basics/10-block-scope/challenges/2-assert-variables.js'
+                },
+                {
+                  name: 'Assign Values',
+                  path: '../javascript-basics/10-block-scope/challenges/3-assign-values.js'
+                },
+                {
+                  name: 'Declare and Assign',
+                  path: '../javascript-basics/10-block-scope/challenges/4-declare-and-assign.js'
+                },
+              ]
+            })
+          </script>
+        </section>
       </section>
 
       <section id='conditional-statements'>
         <section>
           <h2>Conditional Statements</h2>
           <br>
-          <p>Simplifying long lines of code</p>
+          <p>different possible paths</p>
           <br>
           <code>(at home)</code>
         </section>
+        <section>
+          <h3>Code-Alongs</h3>
+          <p>Conditional Statements</p>
+          <br>
+          <ul>
+            <li><a href='#conditional-statements-intro'>
+                Intro
+              </a></li>
+            <li><a href='#unreachable-paths'>
+                Unreachable Paths
+              </a></li>
+            <li><a href='#conditional-challenges'>
+                Conditional Challenges
+              </a></li>
+          </ul>
+        </section>
+        <section>
+          <h3>Helpful Links</h3>
+          <p>Conditional Statements</p>
+          <br>
+          <ul>
+            <li><a href='https://javascript.info/ifelse' target='_blank'>
+                javascript.info/ifelse
+              </a></li>
+            <li><a href='https://www.guru99.com/how-to-use-conditional-statements-in-javascript.html' target='_blank'>
+                guru99: how to use conditional statements
+              </a></li>
+            <li><a href='https://www.w3schools.com/js/js_if_else.asp' target='_blank'>
+                w3schools: if else and else if
+              </a></li>
+            <li><a href='https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/conditionals'
+                target='_blank'>
+                MDN: making decisions in your code
+              </a></li>
+            <li><a href='https://janke-learning.org/flowviz/' target='_blank'>
+                visualize conditional statements
+              </a></li>
+          </ul>
+        </section>
+        <section id='conditional-statements-intro'>
+          <script>
+            codeAlong({
+              title: 'Conditionals: Intro',
+              container: 'conditional-statements-intro',
+              type: 'js',
+              source: [
+                {
+                  name: 'if else',
+                  path: '../javascript-basics/11-conditionals/if-else.js'
+                },
+                {
+                  name: 'if else, if else',
+                  path: '../javascript-basics/11-conditionals/if-else-if-else.js'
+                },
+                {
+                  name: 'Sequential Conditionals',
+                  path: '../javascript-basics/11-conditionals/sequential-conditionals.js'
+                },
+                {
+                  name: 'Nested Conditionals',
+                  path: '../javascript-basics/11-conditionals/nested-conditionals.js'
+                },
+              ]
+            })
+          </script>
+        </section>
+        <section id='unreachable-paths'>
+          <script>
+            codeAlong({
+              title: 'Unreachable Paths',
+              container: 'unreachable-paths',
+              type: 'js',
+              source: [
+                {
+                  name: 'Unreachable: 1',
+                  path: '../javascript-basics/11-conditionals/unreachable-paths/unreachable-1.js'
+                },
+                {
+                  name: 'Unreachable: 2',
+                  path: '../javascript-basics/11-conditionals/unreachable-paths/unreachable-2.js'
+                },
+                {
+                  name: 'Unreachable: 3',
+                  path: '../javascript-basics/11-conditionals/unreachable-paths/unreachable-3.js'
+                },
+                {
+                  name: 'Unreachable: 4',
+                  path: '../javascript-basics/11-conditionals/unreachable-paths/unreachable-4.js'
+                },
+              ]
+            })
+          </script>
+        </section>
+        <section id='conditional-challenges'>
+          <script>
+            codeAlong({
+              title: 'Conditional Challenges',
+              container: 'conditional-challenges',
+              type: 'js',
+              source: [
+                {
+                  name: 'Write Tests 1',
+                  path: '../javascript-basics/11-conditionals/challenges/write-tests-1.js'
+                },
+                {
+                  name: 'Write Tests 2',
+                  path: '../javascript-basics/11-conditionals/challenges/write-tests-2.js'
+                },
+                {
+                  name: 'Pass Tests 1',
+                  path: '../javascript-basics/11-conditionals/challenges/pass-tests-1.js'
+                },
+                {
+                  name: 'Pass Tests 2',
+                  path: '../javascript-basics/11-conditionals/challenges/pass-tests-2.js'
+                },
+              ]
+            })
+          </script>
+        </section>
       </section>
 
+      <section id='incrementing-operators'>
+        <section>
+          <h2>Incrementing Operators</h2>
+          <br>
+          <p>Add or Subtract to variables</p>
+          <br>
+          <code>(at home)</code>
+        </section>
+        <!-- <section>
+          <h3>Helpful Links</h3>
+          <p>Incrementing Operators</p>
+          <br>
+          <ul>
+            <li><a href='' target='_blank'>
+              </a></li>
+          </ul> -->
+      </section>
+      <section id='incrementing-operators-code-along'>
+        <script>
+          codeAlong({
+            title: 'Incrementing Operators',
+            container: 'incrementing-operators-code-along',
+            type: 'js',
+            source: [
+              {
+                name: 'The Operators',
+                path: '../javascript-basics/12-incrementing-operators/incrementing-operators.js'
+              },
+              {
+                name: 'Expanding Incrementors',
+                path: '../javascript-basics/12-incrementing-operators/expanding-incrementors.js'
+              },
+              {
+                name: 'Implicit Coercion (gotcha!)',
+                path: '../javascript-basics/12-incrementing-operators/implicit-coercion-gotcha.js'
+              },
+              {
+                name: "iife's (foot note)",
+                path: '../javascript-basics/12-incrementing-operators/iffes-footnote.js'
+              },
+            ]
+          })
+        </script>
+      </section>
+      </section>
 
       <section id='loops'>
         <section>
           <h2>Loops</h2>
           <br>
-          <p>Repeating commands</p>
+          <p>Repeating the same lines of code</p>
           <br>
           <code>(in class)</code>
         </section>
+        <section>
+          <h3>Code-Alongs</h3>
+          <p>Loops</p>
+          <br>
+          <ul>
+            <li><a href='#loops-intro'>
+                Loops Intro
+              </a></li>
+            <li><a href='#infinite-loops'>
+                Infinite Loops
+              </a></li>
+            <li><a href='#refactoring-loops'>
+                Refactoring Loops
+              </a></li>
+            <!-- <li><a href='#challenges'>
+                Loop Challenges
+              </a></li> -->
+          </ul>
+        </section>
+        <section>
+          <h3>Helpful Links</h3>
+          <p>Loops</p>
+          <br>
+          <ul>
+            <li><a href='https://javascript.info/while-for' target='_blank'>
+                javascript.info/while-for
+              </a></li>
+            <li><a href='https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Loops_and_iteration'
+                target='_blank'>
+                MDN: loops & iteration
+              </a></li>
+            <li><a href='https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for'
+                target='_blank'>
+                MDN: for
+              </a></li>
+            <li><a href='https://www.w3schools.com/js/js_loop_for.asp' target='_blank'>
+                w3schools: for
+              </a></li>
+            <li><a href='https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/while'
+                target='_blank'>
+                MDN: while
+              </a></li>
+            <li><a href='https://www.w3schools.com/js/js_loop_while.asp' target='_blank'>
+                w3schools: while
+              </a></li>
+            <li><a href='https://github.com/colevandersWands/loop-refactors' target='_blank'>
+                refactoring loops
+              </a></li>
+          </ul>
+        </section>
+        <section id='loops-intro'>
+          <script>
+            codeAlong({
+              title: 'Loops: Intro',
+              container: 'loops-intro',
+              type: 'js',
+              source: [
+                {
+                  name: 'while',
+                  path: '../javascript-basics/13-loops/while.js'
+                },
+                {
+                  name: 'for',
+                  path: '../javascript-basics/13-loops/for.js'
+                },
+                {
+                  name: 'do ... while',
+                  path: '../javascript-basics/13-loops/do-while.js'
+                },
+              ]
+            })
+          </script>
+        </section>
+        <section id='infinite-loops'>
+          <script>
+            codeAlong({
+              title: 'Infinite Loops',
+              container: 'infinite-loops',
+              type: 'js',
+              source: [
+                {
+                  name: 'while',
+                  path: '../javascript-basics/13-loops/infinite-loops/while.js'
+                },
+                {
+                  name: 'for',
+                  path: '../javascript-basics/13-loops/infinite-loops/for.js'
+                },
+                {
+                  name: 'do ... while',
+                  path: '../javascript-basics/13-loops/infinite-loops/do-while.js'
+                },
+              ]
+            })
+          </script>
+        </section>
+        <section id='refactoring-loops'>
+          <script>
+            codeAlong({
+              title: 'Refactoring Loops',
+              container: 'refactoring-loops',
+              type: 'js',
+              source: [
+                {
+                  name: 'while -> for (1)',
+                  path: '../javascript-basics/13-loops/refactoring-loops/while-to-for-1.js'
+                },
+                {
+                  name: 'while -> for (2)',
+                  path: '../javascript-basics/13-loops/refactoring-loops/while-to-for-2.js'
+                },
+                {
+                  name: 'for -> while (1)',
+                  path: '../javascript-basics/13-loops/refactoring-loops/for-to-while-1.js'
+                },
+                {
+                  name: 'for -> while (2)',
+                  path: '../javascript-basics/13-loops/refactoring-loops/for-to-while-2.js'
+                },
+              ]
+            })
+          </script>
+        </section>
       </section>
-
 
 
       <section id='review'>
