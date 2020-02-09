@@ -22,7 +22,7 @@ const isItTruthy = (a, b) => {
 isItTruthyTests.forEach(function evaluateTestCases(test) {
   console.assert(
     Number.isNaN(test.expected)
-      ? Number.isNaN(challenge(...test.args))
-      : test.expected === challenge(...test.args),
+      ? Number.isNaN(isItTruthy(...test.args))
+      : test.expected === isItTruthy(...test.args),
     test.name);
 });

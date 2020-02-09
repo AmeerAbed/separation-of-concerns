@@ -96,7 +96,6 @@ async function codeAlong(config) {
   const steps = [];
 
   const iframe = await codeAlong.createIframe(config);
-  container.appendChild(iframe);
 
   const loadButton = document.createElement('button');
   loadButton.innerHTML = 'click to load code-along';
@@ -127,6 +126,8 @@ async function codeAlong(config) {
   iframe.contentDocument.body.style = 'position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;';
   iframe.contentDocument.body.appendChild(tempHeader);
   iframe.contentDocument.body.appendChild(loadButton);
+
+  container.appendChild(iframe);
 
   return { steps, container };
 
