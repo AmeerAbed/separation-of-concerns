@@ -38,7 +38,8 @@ step through in debugger: will run the current editor ---
     ... insert a debugger statement before the first line
     ... try to guard against infinite loops
 with infinite loop guard: will run the current editor ---
-    ... like above, but with infinite loop protection
+    ... like above, but will format your code
+    ... and inject infinite loop guards
 Open In Js Tutor: will open the current code in JS Tutor ---
     ... use this button ALL THE TIME!
 Open In JSHint: opens your code in an online Linter that will ---
@@ -48,7 +49,6 @@ Open In JSHint: opens your code in an online Linter that will ---
     ... evaluate the complexity of your code
 Format Code: will make code in the current editor prettier ---
     ... make your code easier to read
-    ... help to guard against infinite loops
 `;
 
 
@@ -95,7 +95,7 @@ async function codeAlong(config) {
 
   const steps = [];
 
-  const iframe = await codeAlong.createIframe(config);
+  const iframe = codeAlong.createIframe(config);
 
   const loadButton = document.createElement('button');
   loadButton.innerHTML = 'click to load code-along';
@@ -122,10 +122,11 @@ async function codeAlong(config) {
 
   const tempHeader = document.createElement('h1');
   tempHeader.innerHTML = config.title ? config.title : '';
-
-  iframe.contentDocument.body.style = 'position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;';
-  iframe.contentDocument.body.appendChild(tempHeader);
-  iframe.contentDocument.body.appendChild(loadButton);
+  iframe.onload = () => {
+    iframe.contentDocument.body.style = 'position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;';
+    iframe.contentDocument.body.appendChild(tempHeader);
+    iframe.contentDocument.body.appendChild(loadButton);
+  }
 
   container.appendChild(iframe);
 
@@ -133,14 +134,11 @@ async function codeAlong(config) {
 
 }
 
-codeAlong.createIframe = async () => {
-
-  const result = {};
+codeAlong.createIframe = () => {
 
   const iframe = document.createElement('iframe');
   iframe.style = 'height:93vh;width:100%;overflow:hidden;background-color:white;';
   iframe.setAttribute('scrolling', 'no');
-  result.iframe = iframe;
   return iframe;
 
 }
@@ -479,7 +477,22 @@ codeAlong.js = (iframe, steps, config) => {
   withLoopGuard.addEventListener('click', function with_infinite_loop_guard(event) {
     resultsContainer.innerHTML = '';
     const max = Number(event.target.form.max.value);
-    const allDone = codeAlong.with_infinite_loop_guard(editor.getValue(), max);
+    let allDone;
+    try {
+      // does it exist?
+      js_beautify('', {
+        indent_size: '  ',
+        "brace_style": "collapse,preserve-inline",
+      });
+      allDone = codeAlong.format_and_loop_guard(
+        js_beautify(editor.getValue(), {
+          indent_size: '  ',
+          "brace_style": "collapse,preserve-inline",
+        })
+        , max);
+    } catch (err) {
+      allDone = codeAlong.with_infinite_loop_guard(editor.getValue(), max);
+    }
     const debuggeredEl = document.createElement('pre');
     debuggeredEl.innerHTML = allDone;
     resultsContainer.appendChild(debuggeredEl);
@@ -593,16 +606,22 @@ codeAlong.step_through_in_debugger = function in_debugger(your_source_code) {
   return "     All done! \n\n     (psst. try again with devtools open if they aren't already)";
 }
 
-codeAlong.with_infinite_loop_guard = function with_infinite_loop_guard(your_source_code, max) {
+codeAlong.format_and_loop_guard = function with_infinite_loop_guard(your_source_code, max_iterations) {
   let loopNumber = 0;
   try {
     eval(
       'debugger; // injected by codeAlong ->  error messages will be off by 2 lines\n'
       + '\n'
-      + your_source_code.replace(/for *\(.*\{|while *\(.*\{|do *\{/g, loopHead => {
-        loopNumber++;
-        return `let _loop${loopNumber} = 0; ${loopHead} if (++_loop${loopNumber} > ${max}) throw new Error('Loop exceeded ${max} iterations');`
-      })
+      + js_beautify(
+        your_source_code.replace(/for *\(.*\{|while *\(.*\{|do *\{/g, loopHead => {
+          loopNumber++;
+          return `let _loop${loopNumber} = 0; ${loopHead} if (++_loop${loopNumber} > ${max}) throw new Error('Loop exceeded ${max} iterations');`
+        }),
+        {
+          indent_size: '  ',
+          "brace_style": "collapse,preserve-inline",
+        }
+      )
     );
   } catch (err) {
     console.log(err);
