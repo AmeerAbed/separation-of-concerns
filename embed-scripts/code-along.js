@@ -502,7 +502,7 @@ codeAlong.js = (iframe, steps, config) => {
   maxIterationsInput.style = 'width:3em';
 
   const maxIterationsForm = document.createElement('form');
-  maxIterationsForm.style = 'display:inline;';
+  maxIterationsForm.style = 'display:inline-block;';
   maxIterationsForm.appendChild(withLoopGuard);
   maxIterationsForm.appendChild(maxIterationsInput);
 
@@ -625,7 +625,7 @@ codeAlong.format_and_loop_guard = function with_infinite_loop_guard(your_source_
   } catch (err) {
     console.log(err);
   };
-  return "     All done! \n\n     (psst. try again with devtools open if they aren't already)";
+  return "     All done! \n\n     (psst. your devtools must be open)";
 }
 
 // // bad because hoisted values are in scope with source code
