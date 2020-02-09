@@ -28,6 +28,7 @@ function replication(x, y) {
     return Number(x) + Number(y);
   }
 }
+
 // test both functions with the same test cases
 plusTests.forEach(function evaluateTestCase(test) {
   const expectedNaN = Number.isNaN(test.expected);
