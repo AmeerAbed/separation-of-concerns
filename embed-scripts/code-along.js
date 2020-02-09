@@ -472,7 +472,7 @@ codeAlong.js = (iframe, steps, config) => {
 
   const withLoopGuard = document.createElement('input');
   withLoopGuard.setAttribute('type', 'button');
-  withLoopGuard.value = '.. with max iterations = ';
+  withLoopGuard.value = '... with max_iterations = ';
   withLoopGuard.addEventListener('click', function with_infinite_loop_guard(event) {
     resultsContainer.innerHTML = '';
     const max = Number(event.target.form.max.value);
