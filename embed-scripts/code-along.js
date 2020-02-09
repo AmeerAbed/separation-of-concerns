@@ -36,10 +36,9 @@ const codeAlongGuide = `evaluate code: will run the code in the current editor -
     ... remove all debugger statements
 step through in debugger: will run the current editor ---
     ... insert a debugger statement before the first line
-    ... try to guard against infinite loops
 with infinite loop guard: will run the current editor ---
     ... like above, but will format your code
-    ... and inject infinite loop guards
+    ... try to insert an infinite loop guard at every loop
 Open In Js Tutor: will open the current code in JS Tutor ---
     ... use this button ALL THE TIME!
 Open In JSHint: opens your code in an online Linter that will ---
