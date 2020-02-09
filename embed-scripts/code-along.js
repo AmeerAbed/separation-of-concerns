@@ -596,7 +596,7 @@ codeAlong.js = (iframe, steps, config) => {
 codeAlong.step_through_in_debugger = function in_debugger(your_source_code) {
   try {
     eval(
-      'debugger; // injected by codeAlong ->  error messages will be off by 2 lines\n'
+      'debugger; // injected by codeAlong -> error messages will be off by two lines\n'
       + '\n'
       + your_source_code
     );
@@ -610,12 +610,12 @@ codeAlong.format_and_loop_guard = function with_infinite_loop_guard(your_source_
   let loopNumber = 0;
   try {
     eval(
-      'debugger; // injected by codeAlong ->  error messages will be off by 2 lines\n'
+      'debugger; // injected by codeAlong\n'
       + '\n'
       + js_beautify(
         your_source_code.replace(/for *\(.*\{|while *\(.*\{|do *\{/g, loopHead => {
           loopNumber++;
-          return `let _loop${loopNumber} = 0; ${loopHead} if (++_loop${loopNumber} > ${max}) throw new Error('Loop exceeded ${max} iterations');`
+          return `let _loop${loopNumber} = 0; // injected by codeAlong\n ${loopHead}\n if (++_loop${loopNumber} > ${max_iterations}) throw new Error('Loop exceeded ${max_iterations} iterations'); // injected by codeAlong\n`
         }),
         {
           indent_size: '  ',
