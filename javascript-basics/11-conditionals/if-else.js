@@ -1,13 +1,13 @@
 // conditional statements execute different lines of code
 //  based on whether the condition is truthy or falsey
 const conditionalTests = [
-  { name: 'first', args: ['asdf', 0], expected: null },
-  { name: 'second', args: [0, false], expected: null },
-  { name: 'third', args: ['', 0], expected: null },
-  { name: 'fourth', args: [100, false], expected: null },
-  { name: 'fifth', args: [NaN, ''], expected: null },
-  { name: 'sixth', args: ['', ''], expected: null },
-  { name: 'seventh', args: [-1, 1], expected: null },
+  { name: 'first', args: ['asdf', 0], expected: 'truthy' },
+  { name: 'second', args: [0, false], expected: 'falsey' },
+  { name: 'third', args: ['', 0], expected: 'truthy' },
+  { name: 'fourth', args: [100, false], expected: 'truthy' },
+  { name: 'fifth', args: [NaN, ''], expected: 'truthy' },
+  { name: 'sixth', args: ['', ''], expected: 'falsey' },
+  { name: 'seventh', args: [-1, 1], expected: 'truthy' },
 ];
 
 function conditional(a, b) {
