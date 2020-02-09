@@ -1,4 +1,8 @@
-// Psst, google the && operator.  it will help a lot!
+// You can solve these challenges using only:
+//  typeof, ===, && (the and operator, this is new!)
+// hint, study the "asserting & comparisons" exercise:
+//  "strict comparisons"
+//  what happens when you put three comparisons in a row?
 const testCases = [
   { name: 'first', args: [true, true, true], expected: true },
   { name: 'second', args: [1e5, NaN, Infinity], expected: true },
