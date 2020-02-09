@@ -17,7 +17,7 @@ const ifElseIfElseTests = [
 ];
 
 function ifElseIfElse(x) {
-  if (arguments.length === 0) throw new Error('test case is empty');
+  if (arguments.length === 0) throw new Error('please provide 1 argument');
 
   if (typeof x === 'number') {
     return 'path 1';
