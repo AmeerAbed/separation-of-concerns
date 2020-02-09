@@ -606,15 +606,15 @@ codeAlong.step_through_in_debugger = function in_debugger(your_source_code) {
 }
 
 codeAlong.format_and_loop_guard = function with_infinite_loop_guard(your_source_code, max_iterations) {
-  let loopNumber = 0;
+  let number_of_loops = 0;
   try {
     eval(
       'debugger; // injected by codeAlong\n'
       + '\n'
       + js_beautify(
         your_source_code.replace(/for *\(.*\{|while *\(.*\{|do *\{/g, loopHead => {
-          loopNumber++;
-          return `let _loop${loopNumber} = 0; // injected by codeAlong\n ${loopHead}\n if (++_loop${loopNumber} > ${max_iterations}) throw new Error('Loop exceeded ${max_iterations} iterations'); // injected by codeAlong\n`
+          number_of_loops++;
+          return `let loop_${number_of_loops}_iterations = 0; // injected by codeAlong\n ${loopHead}\n if (++loop_${number_of_loops}_iterations > ${max_iterations}) throw new Error('Loop ${number_of_loops} exceeded ${max_iterations} iterations'); // injected by codeAlong\n`
         }),
         {
           indent_size: '  ',
