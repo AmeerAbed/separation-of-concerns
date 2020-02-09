@@ -7,19 +7,24 @@
 let variable;
 // = assigns a new value in a variable, updating memory
 variable = 12;
+console.assert(variable === 12, 'first');
 
 // === compares if two values without updating memory
 variable === 13;
+console.assert(variable === 12, 'second');
 
 // you can capture a comparison's value with an assignment
 const firstComparison = variable === 13;
+console.assert(firstComparison === false, 'third');
 
 // === compares the CURRENT value assigned to a variable
 variable = 13;
 const secondComparison = variable === 13;
+console.assert(secondComparison === true, 'fourth');
 
 // === comparisons can be written either way
 13 === variable;
+console.assert(variable === 13, 'fifth');
 
-// = assignments cannot
+// = assignments cannot be written either way
 13 = variable;
