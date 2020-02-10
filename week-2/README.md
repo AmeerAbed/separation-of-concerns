@@ -47,34 +47,46 @@ Study the [Sunday lesson plan](https://hackyourfuture.be/separation-of-concerns/
 
 ## Assignments
 
-This week there is 1 project, and 3 exercise sets.
+This week there is a change in the way we are dealing with homework. During the week you are now expected to spend most of your time studying and mastering the basics of JavaScript. We will use class time to learn how these basic skills fit together to solve more complex problems and to build real projects.
 
-### Project:
+So what does this mean for your studying?
 
-> stay posted on slack!  the project will be posted by Monday. there's plenty of exercises to fill your time :)
+It means you should now focus first on the _Isolating JavaScript_ exercises, spending lots of time learning the basics of JavaScript.  Only move on to the _integration_ exercises and the project mid-week when you are feeling comfortable with the basics.
+
+It also means that you are no longer expected to finish the projects on your own over the week. You are still expected to move your homework issues into "READY FOR REVIEW" by Friday so your coaches know how you are doing, but the project does not need to be finished!
+
+Coaches will be using your homework submissions to assess what skills or concepts are causing the most difficulties so they can plan the best way to help you all on Sunday.
 
 ### Exercises
 
-There are 3 sets of exercises to start this week:
 
-* Fork [listeners-and-handlers](https://github.com/hackyourfuturebelgium/listeners-and-handlers) &  [handler-refactors](https://github.com/hackyourfuturebelgium/handler-refactors)
+#### Isolating JavaScript
+
+* Continue the FreeCodeCamp JavaScript exercises
+  * Sign into FreeCodeCamp using your GitHub Account
+  * Turn on your Public Profile
+  * Complete [Basic JavaScript](https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/basic-javascript/) up through [Iterate with JS do ... while loops](https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/basic-javascript/iterate-with-javascript-do...while-loops)
+* Fork [JS Exercises](https://github.com/CodeYourFuture/js-exercises/)
+  * Solve the Exercises in the folders called `week-1` and `week-1-practice`
+  * You will need to run these exercises [in Node.js](https://www.youtube.com/watch?v=DsH-fizHkcY), but don't be intimidated!  This is actually a very simple way to run your code.  With a little practice using `cd` and `ls` from the command line you'll be good to go!
+  * VSC comes built-in with a very good [JavaScript debugger](https://www.youtube.com/watch?v=DsH-fizHkcY) that will help you to step through your code and understand what is happening inside your program.  At first this will be a bit intimidating, but soon you'll wonder how you ever programmed without it.
+
+#### Integrating JavaScript
+
+* Fork [listeners-and-handlers](https://github.com/hackyourfuturebelgium/listeners-and-handlers)
+  * Turn on GitHub Pages
+  * Push your work regularly, so you can ask questions with issues!
+* [handler-refactors](https://github.com/hackyourfuturebelgium/handler-refactors)
   * Turn on GitHub Pages
   * Push your work regularly, so you can ask questions with issues!
 * Fork [using-user-input](https://github.com/hackyourfuturebelgium/using-user-input)
   * Turn on GitHub Pages
   * Complete `2-fix-the-bugs` and `3-develop-from-specs`
   * Push your work regularly, so you can ask questions with issues!
-* Continue the FreeCodeCamp JavaScript exercises
-  * Sign into FreeCodeCamp using your GitHub Account
-  * Turn on your Public Profile
-  * Complete [Basic JavaScript](https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/basic-javascript/) up through [Iterate with JS do ... while loops](https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/basic-javascript/iterate-with-javascript-do...while-loops)
-  * Copy-paste each and every exercise into [JS Tutor](http://pythontutor.com/javascript.html#mode=edit) to get the most out of your studying!
-* Continue studying the exercises from in class
-  * You can study them live [in the lesson plan](https://hackyourfuture.be/separation-of-concerns/week-2)
-  * There are example projects to study in [example-projects](../example-projects).  Don't forget to practice with the Debugger!
-  * Feeling motivated? You can clone this repository and try run [the JS exercise source files](../javascript-basics) in Node.js.  Either way, study the exercises in [JS Tutor](http://pythontutor.com/javascript.html#mode=edit) and practice them until you can code them with your eyes closed.
 
-Looking for an extra challenge? Try solving each exercise on a different branch!
+### Project
+
+> stay posted on slack!  the project will be announced by Monday. there's plenty of exercises to fill your time :)
 
 ---
 ---

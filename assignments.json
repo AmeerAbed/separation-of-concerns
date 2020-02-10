@@ -17,6 +17,24 @@
   ],
   "exercises": [
     {
+      "name": "FCC: Basic JavaScript",
+      "live": "https://freecodecamp.org/<user-name>",
+      "source": false
+    },
+    {
+      "name": "FCC: Debugging",
+      "live": "https://freecodecamp.org/<user-name>",
+      "source": false
+    },
+    {
+      "name": "js-exercises",
+      "live": false,
+      "endpoints": [
+        "week-1",
+        "week-1-practice"
+      ]
+    },
+    {
       "name": "listeners-and-handlers",
       "live": true,
       "endpoints": [
@@ -55,21 +73,6 @@
         "week-2",
         "week-3"
       ]
-    },
-    {
-      "name": "FCC: Basic JavaScript",
-      "live": "https://freecodecamp.org/<user-name>",
-      "source": false
-    },
-    {
-      "name": "FCC: Debugging",
-      "live": "https://freecodecamp.org/<user-name>",
-      "source": false
-    },
-    {
-      "name": "FCC: Regular Expressions",
-      "live": "https://freecodecamp.org/<user-name>",
-      "source": false
     }
   ]
 }
