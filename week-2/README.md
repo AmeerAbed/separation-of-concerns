@@ -57,8 +57,10 @@ It also means that you are no longer expected to finish the projects on your own
 
 Coaches will be using your homework submissions to assess what skills or concepts are causing the most difficulties so they can plan the best way to help you all on Sunday.
 
-### Exercises
+> Before getting started on the homework, take a minute to set up your [Homework Issue](https://github.com/HackYourFutureBelgium/homework-submission#homework-issues) on this module's project board.
 
+
+### Exercises
 
 #### Isolating JavaScript
 
@@ -84,9 +86,22 @@ Coaches will be using your homework submissions to assess what skills or concept
   * Complete `2-fix-the-bugs` and `3-develop-from-specs`
   * Push your work regularly, so you can ask questions with issues!
 
-### Project
+### Project:
 
-> stay posted on slack!  the project will be announced by Monday. there's plenty of exercises to fill your time :)
+> [Starter Code](http://hackyourfuture.be/homework-submission/#projects)
+
+This week's project is to create 5 functions that users can interact with from the browser using [prompt and alert](https://javascript.info/alert-prompt-confirm). To get started [fork this repository](https://github.com/HackYourFutureBelgium/soc-week-2-project), clone it and open the code in VSC.  Here are some tips:
+
+* Open the `index.html` in your browser and open your console.  This is how you'll know if your asserts pass and if there are any errors!
+* Go back and forth between VSC and your browser very often.  Every time you make a change in the code, refresh in the browser to test your code and check for any errors.
+* Work in small steps.  First pass all of the asserts, then move on to completing the 3 incomplete handlers.  You can always call your functions directly from the console without using the handlers.
+
+Your completed project repository must contain:
+
+1. A README describing your project in detail.  Check out these articles to learn more about writing good README's: [makeareadme.com](https://www.makeareadme.com/), [bulldogjob](https://bulldogjob.com/news/449-how-to-write-a-good-readme-for-your-github-project), [meakaakka](https://medium.com/@meakaakka/a-beginners-guide-to-writing-a-kickass-readme-7ac01da88ab3)
+1. One branch per file in the `challenges` folder.
+1. A live demo with: 0 failing asserts, 5 working buttons
+
 
 ---
 ---

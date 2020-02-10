@@ -13,6 +13,17 @@
         "handler",
         "logic"
       ]
+    },
+    {
+      "name": "soc-week-2-project",
+      "live": true,
+      "branches": [
+        "devowel",
+        "madlib",
+        "repeater",
+        "temp-converter",
+        "pad-left"
+      ]
     }
   ],
   "exercises": [
