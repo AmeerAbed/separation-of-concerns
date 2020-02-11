@@ -564,7 +564,10 @@ codeAlong.js = (iframe, steps, config) => {
   buttonDiv.appendChild(buttonsButton);
 
 
-  resultsContainer.id = '\n-- assertions --\n';
+  resultsContainer.id = '-- assertions --';
+  resultsContainer.style = config.title
+    ? 'overflow-y: scroll; height: 76%'
+    : 'overflow-y: scroll; height: 86%';
 
 
   const initialResult = document.createElement('pre');
