@@ -1,0 +1,396 @@
+<!-- redirecting
+  only include examples to actually be seen in class
+  review project first half
+  new stuff second half
+  shorter, simpler examples
+  no starting next week's project yet -->
+
+
+<!-- outline
+  day learning objectives
+  project review/finishing time
+    unstructured
+    students can share their links to go over
+  break
+  new basics
+    arrays
+    looping arrays
+    objects
+    looping objects
+    -->
+
+
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <title>wk 2: Step Through</title>
+
+  <script src='../embed-scripts/code-along.js'></script>
+
+  <link rel="stylesheet" href="../reveal.js/css/reset.css">
+  <link rel="stylesheet" href="../reveal.js/css/reveal.css">
+  <link rel="stylesheet" href="../reveal.js/css/theme/night.css">
+
+  <script src="../embed-scripts/beautify.js"></script>
+
+  <!-- Theme used for syntax highlighting of code -->
+  <!-- <link rel="stylesheet" href="./reveal.js/lib/css/monokai.css"> -->
+
+  <!-- Printing and PDF exports -->
+  <!-- <script>
+        var link = document.createElement('link');
+        link.rel = '../reveal.js/stylesheet';
+        link.type = '../reveal.js/text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? '../reveal.js/css/print/pdf.css' : './reveal.js/css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+      </script> -->
+
+  <style>
+    /* https://stackoverflow.com/questions/25479420/how-to-add-a-fixed-footer-on-all-slides */
+    .reveal .footer {
+      position: absolute;
+      bottom: 1em;
+      left: 1em;
+      font-size: 0.5em;
+    }
+  </style>
+</head>
+
+<body>
+
+
+  <div class="reveal">
+    <div class='footer'>
+      <code id="footer-text">ESC to overview</code>
+      <br>
+      <a id='to-repo' style='visibility:hidden' href="https://github.com/hackyourfuturebelgium/separation-of-concerns"
+        target="_blank">
+        <code>module repository</code>
+      </a>
+    </div>
+
+
+    <div class="slides">
+
+      <section id='cover-slide'>
+        <h3>Separation of Concerns</h3>
+        <br>
+        <h2>Week 3: Organizing Data</h2>
+        <br>
+        <p>
+          hit "s" for speaker notes
+        </p>
+        <a href="https://github.com/hackyourfuturebelgium/separation-of-concerns/tree/master/week-3" target='_blank'>
+          -- back to repo --
+        </a>
+      </section>
+
+
+      <section id="learning-objectives">
+        <section>
+          <h1>Learning Objectives</h1>
+          <br>
+          <br>
+          <p>
+            What can you expect to cover in class today?
+          </p>
+        </section>
+        <section>
+          <h3>Integrating JavaScript</h3>
+          <br>
+          <ul>
+            <li>Review & complete week 2 project</li>
+          </ul>
+        </section>
+        <section>
+          <h3>Isolating JavaScript</h3>
+          <br>
+          <ul>
+            <li>Arrays</li>
+            <li>for ... of</li>
+            <li>Objects</li>
+            <li>for ... in</li>
+          </ul>
+        </section>
+      </section>
+
+      <section id='review'>
+        <h1>Review</h1>
+        <br>
+        <br>
+        <p>Any <code>ask-on-sunday</code> issues?</p>
+        <p>Any other Questions?</p>
+        <br>
+        <code>(~20 min)</code>
+      </section>
+
+      <section id='week-2-project-recap'>
+        <h1>Week 2 Project Recap</h1>
+        <br>
+        <br>
+        <p>Complete and discuss together</p>
+        <br>
+        <br>
+        <code>(~80 min)</code>
+      </section>
+
+      <section id='review'>
+        <h1>Break!</h1>
+        <br>
+        <code>(~20 min)</code>
+      </section>
+
+      <section id='review'>
+        <h1>Isolating JavaScript</h1>
+        <br>
+        <p>Arrays & Objects</p>
+      </section>
+
+      <section id='arrays'>
+        <section>
+          <h2>Arrays</h2>
+          <br>
+          <p>Items in order</p>
+          <br>
+        </section>
+        <section>
+          <h3>Code-Alongs</h3>
+          <p>Arrays</p>
+          <br>
+          <ul>
+          </ul>
+        </section>
+        <section>
+          <h3>Helpful Links</h3>
+          <p>Arrays</p>
+          <br>
+          <ul>
+          </ul>
+        </section>
+        <section id='intro-arrays'>
+          <script>
+            codeAlong({
+              title: 'Intro: Arrays',
+              container: 'intro-arrays',
+              type: 'js',
+              source: [
+                {
+                  name: '',
+                  path: ''
+                },
+              ]
+            })
+          </script>
+        </section>
+      </section>
+
+      <section id='for-of'>
+        <section>
+          <h2><code>for ... of</code></h2>
+          <br>
+          <p>looping through arrays</p>
+          <br>
+        </section>
+        <section>
+          <h3>Code-Alongs</h3>
+          <p>for ... of</p>
+          <br>
+          <ul>
+          </ul>
+        </section>
+        <section>
+          <h3>Helpful Links</h3>
+          <p>for ... of</p>
+          <br>
+          <ul>
+          </ul>
+        </section>
+        <section id='for-of'>
+          <script>
+            codeAlong({
+              title: 'for ... of',
+              container: 'for-of',
+              type: 'js',
+              source: [
+                {
+                  name: '',
+                  path: ''
+                },
+              ]
+            })
+          </script>
+        </section>
+      </section>
+
+      <section id='objects'>
+        <section>
+          <h2>Objects</h2>
+          <br>
+          <p>Items by name</p>
+          <br>
+        </section>
+        <section>
+          <h3>Code-Alongs</h3>
+          <p>Objects</p>
+          <br>
+          <ul>
+          </ul>
+        </section>
+        <section>
+          <h3>Helpful Links</h3>
+          <p>Objects</p>
+          <br>
+          <ul>
+          </ul>
+        </section>
+        <section id='intro-objects'>
+          <script>
+            codeAlong({
+              title: 'Intro: Objects',
+              container: 'intro-objects',
+              type: 'js',
+              source: [
+                {
+                  name: '',
+                  path: ''
+                },
+              ]
+            })
+          </script>
+        </section>
+      </section>
+
+      <section id='for-in'>
+        <section>
+          <h2><code>for ... in</code></h2>
+          <br>
+          <p>looping through objects</p>
+          <br>
+        </section>
+        <section>
+          <h3>Code-Alongs</h3>
+          <p>for ... in</p>
+          <br>
+          <ul>
+          </ul>
+        </section>
+        <section>
+          <h3>Helpful Links</h3>
+          <p>for ... in</p>
+          <br>
+          <ul>
+          </ul>
+        </section>
+        <section id='for-in'>
+          <script>
+            codeAlong({
+              title: 'for ... in',
+              container: 'for-in',
+              type: 'js',
+              source: [
+                {
+                  name: '',
+                  path: ''
+                },
+              ]
+            })
+          </script>
+        </section>
+      </section>
+
+      <section id='homework-launch'>
+        <section>
+          <h2>Homework Launch</h2>
+          <br>
+          <p>It's only just beginning :)</p>
+        </section>
+        <section>
+          <h2><a href='https://github.com/hackyourfuturebelgium/separation-of-concerns/tree/master/week-3'
+              target='_blank'>
+              The Assignments</a></h2>
+        </section>
+        <section>
+          <h2><a href='https://github.com/HackYourFutureBelgium/homework-submission#weekly-issues' target='_blank'>
+              Weekly Issues</a></h2>
+          <p>if you haven't already, please create an issue and:</p>
+          <br>
+          <ol>
+            <li>Name it something helpful</li>
+            <li><a
+                href='https://help.github.com/en/github/managing-your-work-on-github/assigning-issues-and-pull-requests-to-other-github-users'
+                target='_blank'>
+                Assign</a>, it to yourself</li>
+            <li><a
+                href='https://help.github.com/en/github/managing-your-work-on-github/applying-labels-to-issues-and-pull-requests'
+                target='_blank'>
+                Label</a>, it <code>week-3</code></li>
+            <li><a href='https://help.github.com/en/github/managing-your-work-on-github/about-milestones'
+                target='_blank'>
+                Milestone</a> it <code>incremental-development</code></li>
+            <li>Fill in the assignments</li>
+            <li>Move it to the project board</li>
+          </ol>
+        </section>
+      </section>
+
+      <section id='cover-slide'>
+        <h3>Separation of Concerns</h3>
+        <br>
+        <h2>Week 3: Organizing Data</h2>
+        <br>
+        <p>
+          hit "s" for speaker notes
+        </p>
+        <a href="https://github.com/hackyourfuturebelgium/separation-of-concerns/tree/master/week-3" target='_blank'>
+          -- back to repo --
+        </a>
+      </section>
+
+    </div>
+  </div>
+
+  <script src="../reveal.js/js/reveal.js"></script>
+
+  <script>
+    // More info about config & dependencies:
+    // - https://github.com/hakimel/reveal.js#configuration
+    // - https://github.com/hakimel/reveal.js#dependencies
+    Reveal.initialize({
+      slideNumber: 'h/t',
+      width: "100%",
+      height: "100%",
+      keyboard: {
+        67: function () { RevealChalkboard.toggleNotesCanvas() },	// toggle notes canvas when 'c' is pressed
+        66: function () { RevealChalkboard.toggleChalkboard() },	// toggle chalkboard when 'b' is pressed
+        46: function () { RevealChalkboard.clear() },	// clear chalkboard when 'DEL' is pressed
+        8: function () { RevealChalkboard.reset() },	// reset chalkboard data on current slide when 'BACKSPACE' is pressed
+        68: function () { RevealChalkboard.download() },	// downlad recorded chalkboard drawing when 'd' is pressed
+      },
+      dependencies: [
+        // { src: 'plugin/markdown/marked.js' },
+        // { src: 'plugin/markdown/markdown.js' },
+        { src: '../reveal.js/plugin/notes/notes.js', async: true },
+        // { src: './reveal.js/plugin/chalkboard/chalkboard.js' },
+        // { src: 'plugin/highlight/highlight.js', async: true }
+      ]
+    });
+
+    Reveal.addEventListener('overviewshown', function (event) {
+      document.getElementById('footer-text').innerHTML = "ESC into slide";
+      document.getElementById('to-repo').style.visibility = 'visible';
+    });
+    Reveal.addEventListener('overviewhidden', function (event) {
+      document.getElementById('footer-text').innerHTML = "ESC to overview";
+      document.getElementById('to-repo').style.visibility = 'hidden';
+    });
+
+
+
+  </script>
+</body>
+
+</html>
