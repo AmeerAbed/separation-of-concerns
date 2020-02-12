@@ -162,13 +162,15 @@
           <p>Arrays</p>
           <br>
           <ul>
-          </ul>
-        </section>
-        <section>
-          <h3>Helpful Links</h3>
-          <p>Arrays</p>
-          <br>
-          <ul>
+            <li><a href='#intro-arrays'>
+                Intro: Arrays
+              </a></li>
+            <li><a href='#array-challenges'>
+                Array Challenges
+              </a></li>
+            <li><a href='#push-pop-unshift-shift'>
+                <code>.push</code>, <code>.pop</code>, <code>.unshift</code>, <code>.shift</code>
+              </a></li>
           </ul>
         </section>
         <section id='intro-arrays'>
@@ -217,7 +219,7 @@
             })
           </script>
         </section>
-        <section id='p-p-u-s'>
+        <!-- <section id='p-p-u-s'>
           <script>
             codeAlong({
               title: '.push, .pop, .unshift, .shift',
@@ -243,6 +245,13 @@
               ]
             })
           </script>
+        </section> -->
+        <section>
+          <h3>Helpful Links</h3>
+          <p>Arrays</p>
+          <br>
+          <ul>
+          </ul>
         </section>
       </section>
 
@@ -253,12 +262,33 @@
           <p>looping through arrays</p>
           <br>
         </section>
-        <section>
-          <h3>Code-Alongs</h3>
-          <p>for ... of</p>
-          <br>
-          <ul>
-          </ul>
+        <section id='intro-for-of'>
+          <script>
+            codeAlong({
+              title: 'for ... of',
+              container: 'intro-for-of',
+              type: 'js',
+              collapsed: true,
+              source: [
+                {
+                  name: 'for vs. for ... of',
+                  path: '../javascript-basics/14-arrays/for-of/for-vs-for-of.js'
+                },
+                {
+                  name: 'No Infinite Loops!',
+                  path: '../javascript-basics/14-arrays/for-of/no-infinite-loops.js'
+                },
+                {
+                  name: 'Fix the Loops',
+                  path: '../javascript-basics/14-arrays/for-of/fix-the-loops.js'
+                },
+                {
+                  name: 'Pass Tests',
+                  path: '../javascript-basics/14-arrays/for-of/pass-the-tests.js'
+                },
+              ]
+            })
+          </script>
         </section>
         <section>
           <h3>Helpful Links</h3>
@@ -266,21 +296,6 @@
           <br>
           <ul>
           </ul>
-        </section>
-        <section id='intro-for-of'>
-          <script>
-            codeAlong({
-              title: 'for ... of',
-              container: 'intro-for-of',
-              type: 'js',
-              source: [
-                {
-                  name: '',
-                  path: ''
-                },
-              ]
-            })
-          </script>
         </section>
       </section>
 
@@ -298,13 +313,6 @@
           <ul>
           </ul>
         </section>
-        <section>
-          <h3>Helpful Links</h3>
-          <p>Objects</p>
-          <br>
-          <ul>
-          </ul>
-        </section>
         <section id='intro-objects'>
           <script>
             codeAlong({
@@ -313,12 +321,42 @@
               type: 'js',
               source: [
                 {
-                  name: '',
-                  path: ''
+                  name: 'Holding Many Things',
+                  path: '../javascript-basics/15-objects/holding-many-things.js'
+                },
+                {
+                  name: 'dots vs. brackets',
+                  path: '../javascript-basics/15-objects/dots-vs-brackets.js'
                 },
               ]
             })
           </script>
+        </section>
+        <section id='objects-challenges'>
+          <script>
+            codeAlong({
+              title: 'Objects: Challenges',
+              container: 'objects-challenges',
+              type: 'js',
+              source: [
+                {
+                  name: 'Complete the Asserts',
+                  path: '../javascript-basics/15-objects/challenges/complete-the-asserts.js'
+                },
+                {
+                  name: 'Fill the Object',
+                  path: '../javascript-basics/15-objects/challenges/fill-the-object.js'
+                },
+              ]
+            })
+          </script>
+        </section>
+        <section>
+          <h3>Helpful Links</h3>
+          <p>Objects</p>
+          <br>
+          <ul>
+          </ul>
         </section>
       </section>
 
@@ -329,12 +367,33 @@
           <p>looping through objects</p>
           <br>
         </section>
-        <section>
-          <h3>Code-Alongs</h3>
-          <p>for ... in</p>
-          <br>
-          <ul>
-          </ul>
+        <section id='intro-for-in'>
+          <script>
+            codeAlong({
+              title: 'for ... in',
+              container: 'intro-for-in',
+              type: 'js',
+              collapsed: true,
+              source: [
+                {
+                  name: 'for ... in: objects',
+                  path: '../javascript-basics/15-objects/for-in/for-in-objects.js'
+                },
+                {
+                  name: 'Fix the Loops',
+                  path: '../javascript-basics/15-objects/for-in/fix-the-loops.js'
+                },
+                {
+                  name: 'Pass Tests',
+                  path: '../javascript-basics/15-objects/for-in/pass-the-tests.js'
+                },
+                {
+                  name: '(footnote) for ... in: arrays',
+                  path: '../javascript-basics/15-objects/for-in/for-in-arrays.js'
+                },
+              ]
+            })
+          </script>
         </section>
         <section>
           <h3>Helpful Links</h3>
@@ -343,11 +402,20 @@
           <ul>
           </ul>
         </section>
+      </section>
+
+      <section id='reference-vs-value'>
+        <section>
+          <h2><code>Reference vs. Value</code></h2>
+          <br>
+          <p>How objects & arrays are stored</p>
+          <br>
+        </section>
         <section id='intro-for-in'>
-          <script>
+          <!-- <script>
             codeAlong({
               title: 'for ... in',
-              container: 'intro-for-in',
+              container: 'intr-for-in',
               type: 'js',
               source: [
                 {
@@ -356,7 +424,14 @@
                 },
               ]
             })
-          </script>
+          </script> -->
+        </section>
+        <section>
+          <h3>Helpful Links</h3>
+          <p>Reference vs. Values</p>
+          <br>
+          <ul>
+          </ul>
         </section>
       </section>
 

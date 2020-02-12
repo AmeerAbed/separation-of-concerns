@@ -368,7 +368,7 @@ codeAlong.js = (iframe, steps, config) => {
   // editor.setTheme('ace/theme/xcode');
   editor.setFontSize(12);
   editor.getSession().setMode('ace/mode/javascript');
-  editor.getSession().setTabSize(2);
+  editor.getSession().setTabSize(1);
   // editor.setShowInvisibles(true);
   // editor.useSoftTabs(true);
   // editor.session.setOptions({
@@ -393,6 +393,8 @@ codeAlong.js = (iframe, steps, config) => {
   steps.forEach(step => {
     step.session = ace.createEditSession(step.code, 'javascript');
     step.session.setMode('ace/mode/javascript');
+    // step.session.setTabSize(1);
+    step.session.setOptions({ tabSize: 2, useSoftTabs: true });
   });
 
   const resultsContainer = document.createElement('div');
@@ -460,20 +462,18 @@ codeAlong.js = (iframe, steps, config) => {
     resultsContainer.appendChild(results);
   });
 
-  const evaluateInDebugger = document.createElement('button');
-  evaluateInDebugger.innerHTML = 'step through in debugger';
-  evaluateInDebugger.addEventListener('click', function step_through_in_debugger() {
+  function step_through_in_debugger() {
     resultsContainer.innerHTML = '';
     const allDone = codeAlong.step_through_in_debugger(editor.getValue());
     const debuggeredEl = document.createElement('pre');
     debuggeredEl.innerHTML = allDone;
     resultsContainer.appendChild(debuggeredEl);
-  });
+  }
+  const evaluateInDebugger = document.createElement('button');
+  evaluateInDebugger.innerHTML = 'step through in debugger';
+  evaluateInDebugger.addEventListener('click', step_through_in_debugger);
 
-  const withLoopGuard = document.createElement('input');
-  withLoopGuard.setAttribute('type', 'button');
-  withLoopGuard.value = '... with max_iterations = ';
-  withLoopGuard.addEventListener('click', function with_infinite_loop_guard(event) {
+  function with_infinite_loop_guard(event) {
     resultsContainer.innerHTML = '';
     const max = Number(event.target.form.max.value);
     let allDone;
@@ -495,9 +495,13 @@ codeAlong.js = (iframe, steps, config) => {
     const debuggeredEl = document.createElement('pre');
     debuggeredEl.innerHTML = allDone;
     resultsContainer.appendChild(debuggeredEl);
-  });
+  }
+  const withLoopGuard = document.createElement('input');
+  withLoopGuard.setAttribute('type', 'button');
+  withLoopGuard.value = '... with max_iterations = ';
+  withLoopGuard.addEventListener('click', with_infinite_loop_guard);
   const maxIterationsInput = document.createElement('input');
-  maxIterationsInput.value = 50;
+  maxIterationsInput.value = 20;
   maxIterationsInput.name = 'max';
   maxIterationsInput.style = 'width:3em';
 
@@ -534,6 +538,7 @@ codeAlong.js = (iframe, steps, config) => {
   buttonsButton.innerHTML = 'so many buttons?';
   buttonsButton.onclick = () => alert(codeAlongGuide);
 
+
   const buttonDiv = document.createElement('div');
   buttonDiv.style = 'margin-top:2%;margin-bottom:2%;text-align:center;';
   buttonDiv.appendChild(evaluateInCodeAlong);
@@ -564,6 +569,7 @@ codeAlong.js = (iframe, steps, config) => {
   buttonDiv.appendChild(buttonsButton);
 
 
+
   resultsContainer.id = '-- assertions --';
   resultsContainer.style = config.title
     ? 'overflow-y: scroll; height: 76%'
@@ -576,18 +582,97 @@ codeAlong.js = (iframe, steps, config) => {
   //     `;
   resultsContainer.appendChild(initialResult);
 
-  const outputContainer = document.createElement('div');
-  outputContainer.style = 'height: 98vh; width: 55vw; border:solid 1px;';
+  const collapseOutputButton = document.createElement('button');
+  collapseOutputButton.style = 'float:right;';
+  collapseOutputButton.innerHTML = 'collapse';
+  const renderCollapsed = () => {
+    outputContainer.innerHTML = '';
+    outputContainer.appendChild(collapsedOutput);
+    outputContainer.style = 'height: 5vh; width: 98vw; z-index: 100; position: absolute; bottom: 3vh;';
+    editorContainer.style = 'height:92vh;width:94vw;';
+    editor.resize();
+  };
+  collapseOutputButton.onclick = renderCollapsed;
+
+  const visibleContainer = document.createElement('div');
+  visibleContainer.appendChild(collapseOutputButton);
+  // visibleContainer.style = 'height: 98vh; width: 55vw; border:solid 1px;';
+  visibleContainer.style = 'border:solid 1px;';
   if (typeof title === 'string') {
     const titleEl = document.createElement('h1');
     titleEl.innerHTML = title;
     titleEl.style = 'text-align: center;';
-    outputContainer.appendChild(titleEl);
+    visibleContainer.appendChild(titleEl);
   }
-  outputContainer.appendChild(buttonDiv);
-  outputContainer.appendChild(document.createElement('hr'));
-  outputContainer.appendChild(resultsContainer);
+  visibleContainer.appendChild(buttonDiv);
+  visibleContainer.appendChild(document.createElement('hr'));
+  visibleContainer.appendChild(resultsContainer);
 
+
+  const collapsedOutput = document.createElement('div');
+  // collapsedOutput.style = 'height: 10vh; width: 55vw; border:solid 1px;';
+  collapsedOutput.style = 'border:solid 1px; opacity: 1; background-color: white;';
+
+  const unCollapseOutputButton = document.createElement('button');
+  // unCollapseOutputButton.style = 'float:right;';
+  unCollapseOutputButton.innerHTML = 'un-collapse';
+  const renderUnCollapsed = () => {
+    outputContainer.innerHTML = '';
+    outputContainer.appendChild(visibleContainer);
+    outputContainer.style = 'height: 96vh; width: 55vw;';
+    editorContainer.style = 'height:92vh;width:55vw;';
+    editor.resize();
+  };
+  unCollapseOutputButton.onclick = renderUnCollapsed;
+
+  const evalButton = document.createElement('button');
+  evalButton.innerHTML = '&nbsp; &nbsp; run code &nbsp; &nbsp;';
+  evalButton.addEventListener('click', function eval_code() {
+    try {
+      eval(editor.getValue())
+    } catch (err) {
+      console.log(err);
+    }
+  });
+
+  collapsedOutput.appendChild(evalButton);
+  const evaluateInDebuggerCopy = evaluateInDebugger.cloneNode(true);
+  evaluateInDebuggerCopy.onclick = step_through_in_debugger;
+  collapsedOutput.appendChild(evaluateInDebuggerCopy);
+  const maxIterationsFormCopy = maxIterationsForm.cloneNode(true);
+  {
+    maxIterationsFormCopy.childNodes[0].onclick = with_infinite_loop_guard;
+
+    function with_infinite_loop_guard(event) {
+      resultsContainer.innerHTML = '';
+      const max = Number(event.target.form.max.value);
+      try {
+        // does it exist?
+        js_beautify('', {
+          indent_size: '  ',
+          "brace_style": "collapse,preserve-inline",
+        });
+        codeAlong.format_and_loop_guard(
+          js_beautify(editor.getValue(), {
+            indent_size: '  ',
+            "brace_style": "collapse,preserve-inline",
+          })
+          , max);
+      } catch (err) {
+        codeAlong.with_infinite_loop_guard(editor.getValue(), max);
+      }
+    }
+  }
+  collapsedOutput.appendChild(maxIterationsFormCopy);
+  collapsedOutput.appendChild(unCollapseOutputButton);
+
+  const outputContainer = document.createElement('div');
+  outputContainer.style = 'height: 96vh; width: 55vw;';
+  if (config.collapsed === true) {
+    renderCollapsed();
+  } else {
+    renderUnCollapsed();
+  }
 
   iframe.contentDocument.body.style = 'display:flex; flex-direction:row;';
   iframe.contentDocument.body.appendChild(stepsContainer);
@@ -598,7 +683,7 @@ codeAlong.js = (iframe, steps, config) => {
 codeAlong.step_through_in_debugger = function in_debugger(your_source_code) {
   try {
     eval(
-      'debugger; // injected by codeAlong -> error messages will be off by two lines\n'
+      'debugger; // injected by codeAlong\n'
       + '\n'
       + your_source_code
     );
@@ -617,13 +702,30 @@ codeAlong.format_and_loop_guard = function with_infinite_loop_guard(your_source_
       + js_beautify(
         your_source_code.replace(/for *\(.*\{|while *\(.*\{|do *\{/g, loopHead => {
           number_of_loops++;
-          return `let loop_${number_of_loops}_iterations = 0; // injected by codeAlong\n ${loopHead}\n if (++loop_${number_of_loops}_iterations > ${max_iterations}) throw new Error('Loop ${number_of_loops} exceeded ${max_iterations} iterations'); // injected by codeAlong\n`
+          return `let loop_${number_of_loops}_iterations = 0; // injected by codeAlong\n ${loopHead}\n if (++loop_${number_of_loops}_iterations > ${max_iterations}) {console.log('Loop ${number_of_loops} exceeded ${max_iterations} iterations'); break;} // injected by codeAlong\n`
         }),
         {
           indent_size: '  ',
           "brace_style": "collapse,preserve-inline",
         }
       )
+    );
+  } catch (err) {
+    console.log(err);
+  };
+  return "     All done! \n\n     (psst. your devtools must be open)";
+}
+codeAlong.with_infinite_loop_guard = function with_infinite_loop_guard(your_source_code, max_iterations) {
+  let number_of_loops = 0;
+  try {
+    eval(
+      'debugger; // injected by codeAlong\n'
+      + '\n'
+      +
+      your_source_code.replace(/for *\(.*\{|while *\(.*\{|do *\{/g, loopHead => {
+        number_of_loops++;
+        return `let loop_${number_of_loops}_iterations = 0; // injected by codeAlong\n ${loopHead}\n if (++loop_${number_of_loops}_iterations > ${max_iterations}) {console.log('Loop ${number_of_loops} exceeded ${max_iterations} iterations'); break;} // injected by codeAlong\n`
+      })
     );
   } catch (err) {
     console.log(err);

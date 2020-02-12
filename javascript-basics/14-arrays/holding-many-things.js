@@ -17,5 +17,5 @@ console.assert(coaches[2] === 'gregory', "coaches[2] contains 'gregory'");
 console.assert(coaches.length === 3, 'coaches has 3 entries ...');
 
 // beware!  array indices & array lengths are off by 1:
-console.assert(coaches[3] === undefined, '... but there is no 3rd entry!');
-console.assert(coaches[2] === 'gregory', 'only a 2nd');
+console.assert(coaches[3] === undefined, '... but there is no 3rd entry ...');
+console.assert(coaches[2] === 'gregory', '... only a 2nd!');

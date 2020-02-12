@@ -5,6 +5,7 @@ const colors = ['red', 'orange', 'blue'];
 // remember how .length and indexes are off by 1?
 console.assert(colors.length === 3, 'colors.length is 3');
 console.assert(colors[3] === undefined, 'but there is no colors[3]!');
+console.assert(colors[2] === undefined, 'colors[2] is the last item');
 
 // you can add values to an array after creating them
 colors[3] = 'purple';
