@@ -54,6 +54,7 @@ Coaches will be using your homework submissions to assess what skills or concept
   * Turn on your Public Profile
   * Complete [Basic JavaScript](https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/basic-javascript/)
   * Complete the [_Debugging_ challenges](https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/debugging/) from FreeCodeCamp
+  * Complete [Basic Data Structures](https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/basic-data-structures/)
 * Fork [JS Exercises](https://github.com/CodeYourFuture/js-exercises/)
   * Solve the Exercises in the folders called `week-2`, `week-2-practice`, `week-3`, and `week-3-practice`.
   * You will need to run these exercises [in Node.js](https://www.youtube.com/watch?v=DsH-fizHkcY), but don't be intimidated!  This is actually a very simple way to run your code.  With a little practice using `cd` and `ls` from the command line you'll be good to go!
