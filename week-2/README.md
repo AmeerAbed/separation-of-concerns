@@ -83,7 +83,7 @@ Coaches will be using your homework submissions to assess what skills or concept
   * Push your work regularly, so you can ask questions with issues!
 * Fork [using-user-input](https://github.com/hackyourfuturebelgium/using-user-input)
   * Turn on GitHub Pages
-  * Complete `2-fix-the-bugs` and `3-develop-from-specs`
+  * Complete `1-fill-in-the-blanks`
   * Push your work regularly, so you can ask questions with issues!
 
 ### Project:

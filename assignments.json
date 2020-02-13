@@ -42,7 +42,11 @@
       "live": false,
       "endpoints": [
         "week-1",
-        "week-1-practice"
+        "week-1-practice",
+        "week-2",
+        "week-2-practice",
+        "week-3",
+        "week-3-practice"
       ]
     },
     {
