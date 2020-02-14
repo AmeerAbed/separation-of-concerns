@@ -19,4 +19,11 @@ for (let item of array) {
 
 
 
+// well, unless you keep adding things to your array
 
+
+const growingArray = ['hi'];
+
+for (let item of growingArray) {
+  growingArray.push(item);
+}
