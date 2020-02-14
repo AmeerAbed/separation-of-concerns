@@ -582,13 +582,15 @@ codeAlong.js = (iframe, steps, config) => {
   //     `;
   resultsContainer.appendChild(initialResult);
 
+
   const collapseOutputButton = document.createElement('button');
   collapseOutputButton.style = 'float:right;';
   collapseOutputButton.innerHTML = 'collapse';
   const renderCollapsed = () => {
     outputContainer.innerHTML = '';
     outputContainer.appendChild(collapsedOutput);
-    outputContainer.style = 'height: 5vh; width: 98vw; z-index: 100; position: absolute; bottom: 3vh;';
+    // outputContainer.style = 'height: 5vh; width: 98vw; z-index: 100; position: absolute; bottom: 3vh;';
+    outputContainer.style = 'height: 5vh; width: 55vw; z-index: 100; position: absolute; bottom: 3vh; left: 45vw;';
     editorContainer.style = 'height:92vh;width:94vw;';
     editor.resize();
   };
@@ -607,6 +609,7 @@ codeAlong.js = (iframe, steps, config) => {
   visibleContainer.appendChild(buttonDiv);
   visibleContainer.appendChild(document.createElement('hr'));
   visibleContainer.appendChild(resultsContainer);
+
 
 
   const collapsedOutput = document.createElement('div');
