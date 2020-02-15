@@ -585,7 +585,7 @@ codeAlong.js = (iframe, steps, config) => {
 
   const collapseOutputButton = document.createElement('button');
   collapseOutputButton.style = 'float:right;';
-  collapseOutputButton.innerHTML = 'collapse';
+  collapseOutputButton.innerHTML = ';
   const renderCollapsed = () => {
     outputContainer.innerHTML = '';
     outputContainer.appendChild(collapsedOutput);
@@ -618,7 +618,7 @@ codeAlong.js = (iframe, steps, config) => {
 
   const unCollapseOutputButton = document.createElement('button');
   // unCollapseOutputButton.style = 'float:right;';
-  unCollapseOutputButton.innerHTML = 'un-collapse';
+  unCollapseOutputButton.innerHTML = 'un-;
   const renderUnCollapsed = () => {
     outputContainer.innerHTML = '';
     outputContainer.appendChild(visibleContainer);
