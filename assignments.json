@@ -24,6 +24,17 @@
         "temp-converter",
         "pad-left"
       ]
+    },
+    {
+      "name": "soc-week-3-project",
+      "live": true,
+      "branches": [
+        "replace-substring",
+        "choices",
+        "sort-characters",
+        "reverse-words",
+        "repeat-characters"
+      ]
     }
   ],
   "exercises": [
